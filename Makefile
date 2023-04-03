@@ -14,8 +14,10 @@ $(NAME):	$(OBJ)
 				@echo "\n"
 				@echo "\033[32m$ ----- CUB ! -----"
 				@echo "\n"
-				$(CC) $(OBJ) -o $(NAME)
-
+				@make -C libft
+				@ar -rcs libft/libft.a
+				@cp libft/libft.a libft.a
+				$(CC) $(OBJ) libft.a -o $(NAME)
 clean:
 				@$(RM) $(OBJ)
 

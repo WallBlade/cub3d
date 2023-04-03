@@ -20,4 +20,15 @@
 #include <math.h>
 #include <limits.h>
 
+typedef struct s_garbage
+{
+	void				*ptr;
+	struct s_garbage	*next;
+}		t_garbage;
+t_garbage	**singleton(void);
+void	*collect(size_t size);
+int	lstsize_garb(t_garbage *lst);
+void	add_front(t_garbage **lst, void *ptr);
+void	free_gc(void);
+
 #endif
