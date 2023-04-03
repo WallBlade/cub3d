@@ -1,4 +1,4 @@
-SRCS 	=	src/parsing/parsing.c \
+SRCS 	=	src/parsing/parsing.c src/main.c \
 
 OBJ		=	$(SRCS:.c=.o)
 
@@ -20,9 +20,12 @@ $(NAME):	$(OBJ)
 				$(CC) $(OBJ) libft.a -o $(NAME)
 clean:
 				@$(RM) $(OBJ)
+				@make clean -sC libft
 
 fclean:		clean
 				$(RM) $(NAME)
+				@$(RM) libft.a
+				@make clean -sC libft
 
 re:			fclean $(NAME)
 
