@@ -14,8 +14,10 @@
 
 int	main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
-	printf("Hello CUB !\n");
+	if (argc != 2)
+		return (-1);
+
+	check_filename(argv[1]);
+	init_cub(argv[1]);
 	return (0);
 }

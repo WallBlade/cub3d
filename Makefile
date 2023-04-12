@@ -1,4 +1,5 @@
-SRCS 	=	src/parsing/parsing.c src/main.c \
+SRCS 	=	src/parsing/parsing.c src/parsing/get_next_line.c src/parsing/garbage_collector.c \
+			src/parsing/parsing_utils.c src/parsing/init.c src/main.c \
 
 OBJ		=	$(SRCS:.c=.o)
 

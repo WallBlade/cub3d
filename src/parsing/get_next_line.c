@@ -10,56 +10,108 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_clean(char *stash, char *buf)
-{
-	int		i;
-	int		j;
-	char	*line;
+#include "cub3D.h"
 
-	i = 0;
-	while (stash[i] != '\n' && stash[i])
-		i++;
-	if (stash[i] == '\n')
-		i++;
-	j = 0;
-	line = malloc(sizeof(char) * (i + 1));
-	if (!line)
-		return (NULL);
-	while (j < i && stash[j])
-	{
-		line[j] = stash[j];
-		j++;
-	}
-	line[j] = '\0';
-	j = 0;
-	while (stash[i] && buf[j])
-		buf[j++] = stash[i++];
-	buf[j] = '\0';
-	return (line);
+int search_nl(char *line)
+{
+    int i = 0;
+
+    if (!line)
+        return (0);
+    while (line[i])
+    {
+        if (line[i] == '\n')
+            return (1);
+        i++;
+    }
+    return (0);
 }
 
-char	*get_next_line(int fd)
+char    *clean_buf(char *buf, int red)
 {
-	int			res;
-	char		*line;
-	char		*stash;
-	static char	buf[BUFFER_SIZE + 1];
+    int i;
+    int len = ft_strlen(buf + red);
 
-	if (fd < 0 || fd > FOPEN_MAX || BUFFER_SIZE < 1)
-		return (NULL);
-	res = BUFFER_SIZE;
-	stash = NULL;
-	stash = ft_strjoin(stash, buf);
-	while (res == BUFFER_SIZE && !ft_strchr(buf))
+    i = 0;
+    if (len)
+        ft_strcpy(buf, buf + red, len);
+    while ((i + len) < BUFFER_SIZE && buf[i + len])
+    {
+        buf[i + len] = '\0';
+        i++;
+    }
+    return (buf);
+}
+
+char    *clean_line(char *line, char *buf)
+{
+    char *stash;
+    int i = 0;
+    int len = ft_strlen(line);
+
+    while (buf && buf[i] && buf[i] != '\n')
+        i++;
+    if (buf[i] == '\n')
+        i++;
+    stash = malloc(sizeof(char) * (len + i + 1));
+    if (!stash)
+        return (NULL);
+    stash[len + i] = '\0';
+    ft_strcpy(stash, line, len);
+    ft_strcpy(&stash[len], buf, i);
+    clean_buf(buf, i);
+    if (!stash[0])
+        return (free(stash), NULL);
+    return (stash);
+}
+
+int	count_lines(char *arg)
+{
+    int     fd;
+	int		count;
+	char	*line;
+
+	count = 1;
+    fd = open(arg, O_RDONLY);
+	if (fd < 0)
+		return (FALSE);
+	while (count)
 	{
-		res = read(fd, buf, BUFFER_SIZE);
-		if (res == -1)
-			return (free(stash), NULL);
-		buf[res] = '\0';
-		if (res == 0 && !stash[0])
-			return (free(stash), NULL);
-		stash = ft_strjoin(stash, buf);
+        line = NULL;
+		line = get_next_line(fd);
+		if (line != NULL && line[0] != '\0' && line[0] != '\n')
+			count++;
+		else if (line == NULL)
+			return (close(fd), count - 1);
+		free(line);
 	}
-	line = ft_clean(stash, buf);
-	return (free(stash), line);
+	return (close(fd), FALSE);
+}
+
+char *get_next_line(int fd)
+{
+    int red;
+    char *line;
+    static char buf[BUFFER_SIZE + 1];
+
+    if (fd < 0 || BUFFER_SIZE < 1)
+        return (NULL);
+    line = NULL;
+    red = 1;
+    while (!search_nl(line) && red)
+    {
+        if (!buf[0])
+        {
+            red = read(fd, buf, BUFFER_SIZE);
+            if (red < 0)
+                red = 0;
+            buf[BUFFER_SIZE] = '\0';
+        }
+        line = clean_line(line, buf);
+        if (!line)
+            break ;
+    }
+    if (!line || !line[0])
+        return (free(line), NULL);
+    return (line);
 }
