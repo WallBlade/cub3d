@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/12 23:52:05 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:35:40 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ t_cub	*init_cub(char *arg)
 	if (fd < 0)
 		return (NULL);
 	file = get_file(fd, count);
-	cub->colors = get_colors(file);
-	cub->paths = get_paths(file);
 	cub->map = get_map(file);
+	cub->paths = get_paths(file);
+	cub->colors = get_colors(file);
 	return (cub);
 }

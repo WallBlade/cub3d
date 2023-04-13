@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 14:58:26 by smessal           #+#    #+#             */
-/*   Updated: 2022/05/11 15:13:00 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/13 09:07:29 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,4 @@ int	ft_atoi(const char *nptr)
 		result = result * 10 + (nptr[i++] - '0');
 	return (result * neg);
 }
-/*
-int	main(void)
-{
-	char	test[] = "  -654;32";
-	printf("%d", ft_atoi(test));
-}
-*/
+

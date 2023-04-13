@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 19:29:14 by smessal           #+#    #+#             */
-/*   Updated: 2023/02/26 17:58:55 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:08:08 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	sub[i] = '\0';
 	return (sub);
 }
-/*
-int	main(void)
-{
-	printf("%s", ft_substr("123456789999", 3, 0));
-}
-*/

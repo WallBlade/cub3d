@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 16:24:13 by smessal           #+#    #+#             */
-/*   Updated: 2022/05/12 16:38:32 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/13 09:08:04 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,3 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	dest[dst_len + i] = '\0';
 	return (dst_len + src_len);
 }
-
-/*
-int	main()
-{
-	char dest[20] = "123456789";
-	char src[] = "1234";
-	printf("%zu\n", ft_strlcat(dest, src, 2));
-}
-*/

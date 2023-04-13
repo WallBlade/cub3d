@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 17:31:15 by smessal           #+#    #+#             */
-/*   Updated: 2022/05/12 15:43:02 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/13 09:07:49 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,3 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
-/*
-Correcte mais comment tester
-int	main(void)
-{
-	char *src = "abcdef";
-	char *dest = "123def";
-	char *result;
-	result = memcpy(dest, src, 3);
-	printf("%s", dest);
-}
-*/

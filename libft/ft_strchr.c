@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 19:18:57 by smessal           #+#    #+#             */
-/*   Updated: 2023/02/15 23:20:14 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/13 09:07:54 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,3 @@ int	ft_strchr(const char *str, char c)
 	}
 	return (0);
 }
-/*
-int	main(void)
-{
-	printf("%s\n%s", strchr("loolidu", 'd'), ft_strchr("loolidu", 'z'));
-}
-*/

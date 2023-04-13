@@ -19,5 +19,6 @@ int	main(int argc, char **argv)
 
 	check_filename(argv[1]);
 	init_cub(argv[1]);
+	free_gc();
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 13:03:37 by smessal           #+#    #+#             */
-/*   Updated: 2023/03/06 16:36:39 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/13 09:08:06 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
-/*
-int	main(void)
-{
-	printf("%d\n%d", ft_strncmp("loloco","lolodo", 5), strncmp("loloco",
-	"lolodo", 5));
-}
-*/

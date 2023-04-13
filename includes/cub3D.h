@@ -72,7 +72,8 @@ void	print_error(char *str, char *arg);
 /*--------------------------Parsing-------------------------*/
 
 char	**get_file(int fd, int count);
-char	**get_colors(char **file);
+char	**get_map(char **file);
 char	**get_paths(char **file);
+char	**get_colors(char **file);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 11:56:25 by smessal           #+#    #+#             */
-/*   Updated: 2023/04/12 23:04:58 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/13 08:56:15 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+int		ft_tablen(char **tab);
 int		ft_strlen(const char *str);
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);

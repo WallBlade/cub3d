@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/10 19:22:52 by smessal           #+#    #+#             */
-/*   Updated: 2022/05/10 19:37:47 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/13 09:07:46 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,4 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (NULL);
 }
-/*
-int	main(void)
-{
-	char *test1 = ft_memchr("louidje", 'd', 0);
-	char *test2 = memchr("louidje", 'd', 0);
-	printf("%s\n%s", test1, test2);
-}
-*/
+

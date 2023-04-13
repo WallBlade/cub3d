@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 22:02:54 by smessal           #+#    #+#             */
-/*   Updated: 2023/02/26 17:58:55 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/13 09:07:43 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,3 @@ char	*ft_itoa(int n)
 	num[len - 1] = long_n + '0';
 	return (num);
 }
-/*
-int	main(void)
-{
-	printf("%s", ft_itoa(-7));
-}
-*/
