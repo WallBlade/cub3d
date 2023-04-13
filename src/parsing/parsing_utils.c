@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:53:59 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/12 23:44:09 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/13 16:37:16 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,22 @@ int	check_filename(char *name)
 
 int	is_data(char *line)
 {
-		if (ft_strncmp(line, "NO", 2) == 0)
+		int	i;
+
+		i = 0;
+		while (line && line[i] && (line[i] == ' ' && line[i] == '\t'))
+			i++;
+		if (ft_strncmp(&line[i], "NO", 2) == 0)
 			return (PATH);
-		else if (ft_strncmp(line, "SO", 2) == 0)
+		else if (ft_strncmp(&line[i], "SO", 2) == 0)
 			return (PATH);
-		else if (ft_strncmp(line, "WE", 2) == 0)
+		else if (ft_strncmp(&line[i], "WE", 2) == 0)
 			return (PATH);
-		else if (ft_strncmp(line, "EA", 2) == 0)
+		else if (ft_strncmp(&line[i], "EA", 2) == 0)
 			return (PATH);
-		else if (ft_strncmp(line, "F", 1) == 0)
+		else if (ft_strncmp(&line[i], "F", 1) == 0)
 			return (COLOR);
-		else if (ft_strncmp(line, "C", 1) == 0)
+		else if (ft_strncmp(&line[i], "C", 1) == 0)
 			return (COLOR);
 	return (FALSE);
 }
