@@ -76,4 +76,14 @@ char	**get_map(char **file);
 char	**get_paths(char **file);
 char	**get_colors(char **file);
 
+/*-------------------------UTILS-----------------------------*/
+
+int ft_tablen(char **tab);
+int longest_row(char **tab);
+
+/*-------------------------ERRORS---------------------------*/
+/*--MAP--*/
+
+int		map_closed(char **map);
+
 #endif

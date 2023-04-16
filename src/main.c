@@ -14,11 +14,15 @@
 
 int	main(int argc, char **argv)
 {
+	t_cub	*cub;
+
 	if (argc != 2)
 		return (-1);
 
 	check_filename(argv[1]);
-	init_cub(argv[1]);
+	cub = init_cub(argv[1]);
+	if (!map_closed(cub->map))
+		printf("Not closed\n");
 	free_gc();
 	return (0);
 }
