@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 
 	check_filename(argv[1]);
 	cub = init_cub(argv[1]);
-	if (!map_closed(cub->map))
+	if (!map_closed(cub->map) || !map_elem(cub->map))
 		printf("Not closed\n");
 	free_gc();
 	return (0);

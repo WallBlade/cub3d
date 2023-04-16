@@ -88,5 +88,6 @@ int longest_row(char **tab);
 /*--MAP--*/
 
 int		map_closed(char **map);
+int 	map_elem(char **map);
 
 #endif
