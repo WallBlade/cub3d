@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:53:59 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/13 17:24:35 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/16 14:08:30 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,15 @@ int	is_data(char *line)
 		else if (ft_strncmp(&line[i], "C", 1) == 0)
 			return (COLOR);
 	return (FALSE);
+}
+
+char	*clean_data(char *path)
+{
+	char	*ret;
+	char	**line;
+
+	line = ft_split(path, ' ');
+	if (line[1])
+		ret = ft_strdup(line[1]);
+	return (ret);
 }

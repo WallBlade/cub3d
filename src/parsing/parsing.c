@@ -61,41 +61,45 @@ char	**get_map(char **file)
 char	**get_paths(char **file)
 {
 	int		i;
-	int		j;
 	char	**paths;
 
 	i = 0;
-	j = 0;
 	paths = collect(sizeof(char *) * 5);
 	if (!paths)
 		return (NULL);
 	while (file[i])
 	{
-		if (is_data(file[i]) == PATH)
-			paths[j++] = ft_strdup(file[i++]);
+		if (is_data(file[i]) == 1)
+			paths[NO] = clean_data(file[i]);
+		else if (is_data(file[i]) == 2)
+			paths[SO] = clean_data(file[i]);
+		else if (is_data(file[i]) == 3)
+			paths[WE] = clean_data(file[i]);
+		else if (is_data(file[i]) == 4)
+			paths[EA] = clean_data(file[i]);
 		i++;
 	}
-	paths[j] = NULL;
+	paths[4] = NULL;
 	return (paths);
 }
 
 char	**get_colors(char **file)
 {
 	int		i;
-	int		j;
 	char	**colors;
 
 	i = 0;
-	j = 0;
 	colors = collect(sizeof(char *) * 3);
 	if (!colors)
 		return (NULL);
 	while (file[i])
 	{
-		if (is_data(file[i]) == COLOR)
-			colors[j++] = ft_strdup(file[i++]);
+		if (is_data(file[i]) == 5)
+			colors[0] = clean_data(file[i]);
+		if (is_data(file[i]) == 6)
+			colors[1] = clean_data(file[i]);
 		i++;
 	}
-	colors[j] = NULL;
+	colors[2] = NULL;
 	return (colors);
 }
