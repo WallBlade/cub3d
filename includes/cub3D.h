@@ -16,8 +16,10 @@
 # define TRUE 1
 # define FALSE 0
 # define BUFFER_SIZE 42
-# define PATH 100
-# define COLOR 101
+# define NO 0
+# define SO 1
+# define WE 2
+# define EA 3
 
 #include <unistd.h>
 #include <stdio.h>
