@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/13 15:35:40 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:31:37 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_cub	*init_cub(char *arg)
 	int		count;
 	char	**file;
 
-	cub = malloc(sizeof(t_cub));
+	cub = collect(sizeof(t_cub));
 	if (!cub)
 		return (NULL);
 	count = count_lines(arg);

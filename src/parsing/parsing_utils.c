@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:53:59 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/16 14:08:30 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/16 14:15:51 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,17 @@ int	is_data(char *line)
 		while (line && line[i] && (line[i] == ' ' && line[i] == '\t'))
 			i++;
 		if (ft_strncmp(&line[i], "NO", 2) == 0)
-			return (PATH);
+			return (1);
 		else if (ft_strncmp(&line[i], "SO", 2) == 0)
-			return (PATH);
+			return (2);
 		else if (ft_strncmp(&line[i], "WE", 2) == 0)
-			return (PATH);
+			return (3);
 		else if (ft_strncmp(&line[i], "EA", 2) == 0)
-			return (PATH);
+			return (4);
 		else if (ft_strncmp(&line[i], "F", 1) == 0)
-			return (COLOR);
+			return (5);
 		else if (ft_strncmp(&line[i], "C", 1) == 0)
-			return (COLOR);
+			return (6);
 	return (FALSE);
 }
 

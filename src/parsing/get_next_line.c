@@ -53,7 +53,7 @@ char    *clean_line(char *line, char *buf)
         i++;
     if (buf[i] == '\n')
         i++;
-    stash = malloc(sizeof(char) * (len + i + 1));
+    stash = collect(sizeof(char) * (len + i + 1));
     if (!stash)
         return (NULL);
     stash[len + i] = '\0';
@@ -61,7 +61,7 @@ char    *clean_line(char *line, char *buf)
     ft_strcpy(&stash[len], buf, i);
     clean_buf(buf, i);
     if (!stash[0])
-        return (free(stash), NULL);
+        return (NULL);
     return (stash);
 }
 
@@ -83,7 +83,6 @@ int	count_lines(char *arg)
 			count++;
 		else if (line == NULL)
 			return (close(fd), count - 1);
-		free(line);
 	}
 	return (close(fd), FALSE);
 }
@@ -112,6 +111,6 @@ char *get_next_line(int fd)
             break ;
     }
     if (!line || !line[0])
-        return (free(line), NULL);
+        return (NULL);
     return (line);
 }

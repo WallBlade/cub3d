@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 20:14:01 by smessal           #+#    #+#             */
-/*   Updated: 2023/04/13 09:07:59 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/16 15:00:53 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s1)
 		return (ft_strdup(s2));
 	len = ft_strlen(s1) + ft_strlen(s2);
-	dest = (char *)collect(sizeof(char) * (len + 1));
+	dest = collect(sizeof(char) * (len + 1));
 	if (!dest)
 		return (NULL);
 	i = -1;

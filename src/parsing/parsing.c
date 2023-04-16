@@ -33,9 +33,10 @@ char	**get_file(int fd, int count)
 			line[ft_strlen(line) - 1] = '\0';
 			file[i++] = ft_strdup(line);
 		}
-		free(line);
 	}
 	file[i] = NULL;
+	for (int k = 0; file[k]; k++)
+		printf("%s\n", file[k]);
 	return (close(fd), file);
 }
 

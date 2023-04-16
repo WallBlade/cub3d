@@ -70,6 +70,7 @@ t_cub	*init_cub(char *arg);
 int		is_data(char *line);
 int		check_filename(char *name);
 void	print_error(char *str, char *arg);
+char	*clean_data(char *path);
 
 /*--------------------------Parsing-------------------------*/
 
