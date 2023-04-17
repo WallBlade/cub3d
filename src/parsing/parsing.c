@@ -82,12 +82,13 @@ char	**get_paths(char **file)
 	return (paths);
 }
 
-int	*get_colors(char **file, int type)
+int	get_colors(char **file, int type)
 {
 	int		i;
-	int		*tab;
+	int		tab;
 
 	i = 0;
+	tab = 0;
 	while (file[i])
 	{
 		if (is_data(file[i]) == 5 && type == 1)

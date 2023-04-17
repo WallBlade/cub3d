@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/17 15:49:26 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/17 20:46:57 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,9 @@ t_cub	*init_cub(char *arg)
 	cub->paths = get_paths(file);
 	cub->floor = get_colors(file, 1);
 	cub->ceiling = get_colors(file, 2);
+	cub->mlx_ptr = NULL;
+	cub->win_ptr = NULL;
+	cub->bg = collect(sizeof(t_cub));
+	cub->imgs = NULL;
 	return (cub);
 }

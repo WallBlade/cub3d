@@ -29,14 +29,32 @@
 # include <math.h>
 # include <fcntl.h>
 # include <limits.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
+# include "../mlx_linux/mlx.h"
 # include "../libft/libft.h"
+
+typedef struct s_mlx
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
+	int		width;
+	int		height;
+}		t_mlx;
 
 typedef struct s_cub
 {
-	int		*floor;
-	int		*ceiling;
+	int		floor;
+	int		ceiling;
 	char	**paths;
 	char	**map;
+	void	*mlx_ptr;
+	void	*win_ptr;
+	t_mlx	*bg;
+	t_mlx	*imgs;
 }		t_cub;
 
 typedef struct s_garbage
@@ -71,14 +89,18 @@ int			is_data(char *line);
 int			check_filename(char *name);
 void		print_error(char *str, char *arg);
 char		*clean_data(char *path);
-int			*convert_colors(char *color);
+int			convert_colors(char *color);
+
 
 /*--------------------------Parsing-------------------------*/
 
 char		**get_file(int fd, int count);
 char		**get_map(char **file);
 char		**get_paths(char **file);
-int			*get_colors(char **file, int type);
+int			get_colors(char **file, int type);
+/*--------------------Display--------------------------------*/
+void		init_mlx(t_cub *cub);
+int			handle_keypress(int keysym, t_cub *cub);
 
 /*-------------------------UTILS-----------------------------*/
 

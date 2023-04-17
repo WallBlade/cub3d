@@ -22,6 +22,7 @@ int	main(int argc, char **argv)
 	cub = init_cub(argv[1]);
 	if (!map_closed(cub->map) || !map_elem(cub->map))
 		printf("Not closed\n");
+	init_mlx(cub);
 	free_gc();
 	return (0);
 }

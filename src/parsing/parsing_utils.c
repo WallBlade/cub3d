@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:53:59 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/17 15:49:51 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/17 19:55:28 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,25 +62,31 @@ char	*clean_data(char *path)
 	char	*ret;
 	char	**line;
 
+	ret = NULL;
 	line = ft_split(path, ' ');
 	if (line[1])
 		ret = ft_strdup(line[1]);
 	return (ret);
 }
 
-int	*convert_colors(char *color)
+int	convert_colors(char *color)
 {
-	int		*tab;
+	int		tab[3];
+	int		ret;
 	char	**tmp;
 
-	tab = collect(sizeof(int) * 3);
-	if (!tab)
-		return (NULL);
 	tmp = ft_split(color, ',');
 	if (!tmp || !tmp[2])
-		return (NULL);
+		return (0);
 	tab[0] = ft_atoi(tmp[0]);
 	tab[1] = ft_atoi(tmp[1]);
 	tab[2] = ft_atoi(tmp[2]);
-	return (tab);
+	if (tab[0] > 255 || tab[0] < 0)
+			return (0);
+	if (tab[1] > 255 || tab[1] < 0)
+			return (0);
+	if (tab[2] > 255 || tab[2] < 0)
+			return (0);
+	ret = (tab[0] << 16) + (tab[1] << 8) + (tab[2] << 0);
+	return (ret);
 }
