@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   err_map_closed.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:23:55 by smessal           #+#    #+#             */
-/*   Updated: 2023/04/16 13:57:04 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/17 15:41:55 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,48 +54,47 @@ void	skip_chars(char **map, int *i, int *j, int type)
 	}
 }
 
-
-int row_closed(char **map, int i)
+int	row_closed(char **map, int i)
 {
-    int j;
-    
-    j = 0;
-    skip_white(map, &i, &j, 1);
-    while (map && map[i][j])
-    {
+	int	j;
+
+	j = 0;
+	skip_white(map, &i, &j, 1);
+	while (map && map[i][j])
+	{
 		if (map[i][j] != '1')
 			return (0);
-		skip_chars(map, &i,  &j, 1);
-        if (map[i][j - 1] && map[i][j - 1] != '1')
-            return (0);
-        skip_white(map, &i, &j, 1);
-    }
-    return (1);
+		skip_chars(map, &i, &j, 1);
+		if (map[i][j - 1] && map[i][j - 1] != '1')
+			return (0);
+		skip_white(map, &i, &j, 1);
+	}
+	return (1);
 }
 
-int col_closed(char **map, int j)
+int	col_closed(char **map, int j)
 {
-    int	i;
+	int	i;
 
 	i = 0;
 	skip_white(map, &i, &j, 0);
-    while (map && map[i] && map[i][j])
-    {
+	while (map && map[i] && map[i][j])
+	{
 		if (map[i][j] != '1')
 			return (0);
 		skip_chars(map, &i, &j, 0);
-        if (map[i - 1] && map[i - 1][j] != '1')
+		if (map[i - 1] && map[i - 1][j] != '1')
 			return (0);
 		skip_white(map, &i, &j, 0);
-    }
-    return (1);
+	}
+	return (1);
 }
 
 int	map_closed(char **map)
 {
 	int	i;
 	int	j;
-	
+
 	i = 0;
 	while (map && map[i])
 	{

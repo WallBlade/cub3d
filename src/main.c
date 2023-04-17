@@ -18,7 +18,6 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (-1);
-
 	check_filename(argv[1]);
 	cub = init_cub(argv[1]);
 	if (!map_closed(cub->map) || !map_elem(cub->map))

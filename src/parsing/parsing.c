@@ -35,8 +35,6 @@ char	**get_file(int fd, int count)
 		}
 	}
 	file[i] = NULL;
-	for (int k = 0; file[k]; k++)
-		printf("%s\n", file[k]);
 	return (close(fd), file);
 }
 
@@ -84,23 +82,19 @@ char	**get_paths(char **file)
 	return (paths);
 }
 
-char	**get_colors(char **file)
+int	*get_colors(char **file, int type)
 {
 	int		i;
-	char	**colors;
+	int		*tab;
 
 	i = 0;
-	colors = collect(sizeof(char *) * 3);
-	if (!colors)
-		return (NULL);
 	while (file[i])
 	{
-		if (is_data(file[i]) == 5)
-			colors[0] = clean_data(file[i]);
-		if (is_data(file[i]) == 6)
-			colors[1] = clean_data(file[i]);
+		if (is_data(file[i]) == 5 && type == 1)
+			tab = convert_colors(clean_data(file[i]));
+		if (is_data(file[i]) == 6 && type == 2)
+			tab = convert_colors(clean_data(file[i]));
 		i++;
 	}
-	colors[2] = NULL;
-	return (colors);
+	return (tab);
 }

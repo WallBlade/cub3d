@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:53:59 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/16 14:15:51 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/17 15:49:51 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,23 @@ int	check_filename(char *name)
 
 int	is_data(char *line)
 {
-		int	i;
+	int	i;
 
-		i = 0;
-		while (line && line[i] && (line[i] == ' ' && line[i] == '\t'))
-			i++;
-		if (ft_strncmp(&line[i], "NO", 2) == 0)
-			return (1);
-		else if (ft_strncmp(&line[i], "SO", 2) == 0)
-			return (2);
-		else if (ft_strncmp(&line[i], "WE", 2) == 0)
-			return (3);
-		else if (ft_strncmp(&line[i], "EA", 2) == 0)
-			return (4);
-		else if (ft_strncmp(&line[i], "F", 1) == 0)
-			return (5);
-		else if (ft_strncmp(&line[i], "C", 1) == 0)
-			return (6);
+	i = 0;
+	while (line && line[i] && (line[i] == ' ' && line[i] == '\t'))
+		i++;
+	if (ft_strncmp(&line[i], "NO", 2) == 0)
+		return (1);
+	else if (ft_strncmp(&line[i], "SO", 2) == 0)
+		return (2);
+	else if (ft_strncmp(&line[i], "WE", 2) == 0)
+		return (3);
+	else if (ft_strncmp(&line[i], "EA", 2) == 0)
+		return (4);
+	else if (ft_strncmp(&line[i], "F", 1) == 0)
+		return (5);
+	else if (ft_strncmp(&line[i], "C", 1) == 0)
+		return (6);
 	return (FALSE);
 }
 
@@ -66,4 +66,21 @@ char	*clean_data(char *path)
 	if (line[1])
 		ret = ft_strdup(line[1]);
 	return (ret);
+}
+
+int	*convert_colors(char *color)
+{
+	int		*tab;
+	char	**tmp;
+
+	tab = collect(sizeof(int) * 3);
+	if (!tab)
+		return (NULL);
+	tmp = ft_split(color, ',');
+	if (!tmp || !tmp[2])
+		return (NULL);
+	tab[0] = ft_atoi(tmp[0]);
+	tab[1] = ft_atoi(tmp[1]);
+	tab[2] = ft_atoi(tmp[2]);
+	return (tab);
 }
