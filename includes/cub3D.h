@@ -16,10 +16,14 @@
 # define TRUE 1
 # define FALSE 0
 # define BUFFER_SIZE 42
+# define WIDTH 720
+# define HEIGHT 1080
+# define FOV 90
 # define NO 0
 # define SO 1
 # define WE 2
 # define EA 3
+# define PI 3.14159265358979323846
 
 # include <unistd.h>
 # include <stdio.h>
@@ -45,17 +49,26 @@ typedef struct s_mlx
 	int		height;
 }		t_mlx;
 
+typedef struct s_player
+{
+	double	x;
+	double	y;
+	double	angle;
+}		t_player;
+
 typedef struct s_cub
 {
-	int		floor;
-	int		ceiling;
-	char	**paths;
-	char	**map;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_mlx	*bg;
-	t_mlx	*imgs;
+	int			floor;
+	int			ceiling;
+	char		**paths;
+	char		**map;
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_mlx		*bg;
+	t_mlx		*imgs;
+	t_player	*player;
 }		t_cub;
+
 
 typedef struct s_garbage
 {
@@ -82,6 +95,7 @@ char		*get_next_line(int fd);
 /*---------------------------Init---------------------------*/
 
 t_cub		*init_cub(char *arg);
+void		init_mlx(t_cub *cub);
 
 /*-----------------------Parsing-utils----------------------*/
 
@@ -98,19 +112,24 @@ char		**get_file(int fd, int count);
 char		**get_map(char **file);
 char		**get_paths(char **file);
 int			get_colors(char **file, int type);
-/*--------------------Display--------------------------------*/
-void		init_mlx(t_cub *cub);
+
+/*--------------------------Events--------------------------*/
+
 int			handle_keypress(int keysym, t_cub *cub);
 
-/*-------------------------UTILS-----------------------------*/
+/*--------------------------Utils---------------------------*/
 
 int			ft_tablen(char **tab);
 int			longest_row(char **tab);
 
-/*-------------------------ERRORS---------------------------*/
-/*--MAP--*/
+/*--------------------------Errors--------------------------*/
+/*--err_map_closed--*/
 
 int			map_closed(char **map);
 int			map_elem(char **map);
+
+/*---------------------------Draw---------------------------*/
+
+int			render(t_cub *cub)
 
 #endif
