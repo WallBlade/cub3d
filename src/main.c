@@ -22,7 +22,10 @@ int	main(int argc, char **argv)
 	cub = init_cub(argv[1]);
 	if (!map_closed(cub->map) || !map_elem(cub->map))
 		printf("Not closed\n");
-	init_mlx(cub);
+	// init_mlx(cub);
+	double	*test = distances(cub);
+	for (int i = 0; i < WIDTH; i++)
+		printf("i: %d, dist: %f\n", i, test[i]);
 	free_gc();
 	return (0);
 }

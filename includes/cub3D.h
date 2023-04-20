@@ -51,8 +51,8 @@ typedef struct s_mlx
 
 typedef struct s_player
 {
-	double	x;
-	double	y;
+	int		x;
+	int		y;
 	double	angle;
 }		t_player;
 
@@ -96,6 +96,11 @@ char		*get_next_line(int fd);
 
 t_cub		*init_cub(char *arg);
 void		init_mlx(t_cub *cub);
+t_player	*player_data(char **map);
+double			determine_angle(char c);
+int			is_player(char c);
+
+
 
 /*-----------------------Parsing-utils----------------------*/
 
@@ -112,6 +117,12 @@ char		**get_file(int fd, int count);
 char		**get_map(char **file);
 char		**get_paths(char **file);
 int			get_colors(char **file, int type);
+/*-----------------------Raycasting-------------------------*/
+
+double 	euc_distance(double x1, double y1, double x2, double y2);
+double	castRay(t_cub *cub, double angle);
+double	*distances(t_cub *cub);
+
 
 /*--------------------------Events--------------------------*/
 
@@ -130,6 +141,6 @@ int			map_elem(char **map);
 
 /*---------------------------Draw---------------------------*/
 
-int			render(t_cub *cub)
+int			render(t_cub *cub);
 
 #endif

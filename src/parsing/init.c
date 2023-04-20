@@ -6,11 +6,59 @@
 /*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/18 18:48:58 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/20 13:43:38 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	is_player(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'O');
+}
+
+double	determine_angle(char c)
+{
+	if (c == 'E')
+		return (0.0);
+	else if (c == 'N')
+		return (90.0);
+	else if (c == 'O')
+		return (180.0);
+	else if (c == 'S')
+		return (270.0);
+	else
+		return (-1);
+}
+
+t_player	*player_data(char **map)
+{
+	int			x;
+	int			y;
+	t_player	*player;
+
+	y = 0;
+	player = collect(sizeof(t_player));
+	if (!player)
+		return (NULL);
+	while (map && map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			if (is_player(map[y][x]))
+			{	
+				player->x = x;
+				player->y = y;
+				player->angle = determine_angle(map[y][x]);
+				break ;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (player);
+}
 
 t_cub	*init_cub(char *arg)
 {
@@ -39,61 +87,15 @@ t_cub	*init_cub(char *arg)
 	return (cub);
 }
 
-int	is_player(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'O');
-}
-
-int	determine_angle(char c)
-{
-	if (c == "E")
-		return (0);
-	else if (c == 'N')
-		return (90);
-	else if (c == "O")
-		return (180);
-	else if (c == 'S')
-		return (270);
-}
-
-t_player	*player_data(char **map)
-{
-	int			x;
-	int			y;
-	char		c;
-	t_player	*player;
-
-	x = 0;
-	player = collect(sizeof(t_player));
-	if (!player)
-		return (NULL);
-	while (map[x])
-	{
-		y = 0;
-		while (map[x][y])
-		{
-			if (is_player(map[x][y]))
-			{
-				player->x = x;
-				player->y = y;
-				player->angle = determine_angle(c);
-			}
-			y++;
-		}
-		x++;
-	}
-	return (player);
-}
-
 void	init_mlx(t_cub *cub)
 {
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
 		return ;
-	cub->win_ptr = mlx_new_window(cub->mlx_ptr, 1080, 720, "CUB");
+	cub->win_ptr = mlx_new_window(cub->mlx_ptr, HEIGHT, WIDTH, "CUB");
 	if (!cub->win_ptr)
 		return (free(cub->win_ptr));
-	cub->bg->img_ptr = mlx_new_image(cub->mlx_ptr, 1080, 720);
+	cub->bg->img_ptr = mlx_new_image(cub->mlx_ptr, HEIGHT, WIDTH);
 	cub->bg->addr= mlx_get_data_addr(cub->bg->img_ptr, &cub->bg->bpp, \
 						&cub->bg->line_len, &cub->bg->endian);
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_keypress, cub);
