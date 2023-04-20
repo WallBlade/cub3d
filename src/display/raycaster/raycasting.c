@@ -34,6 +34,8 @@ double	castRay(t_cub *cub, double angle)
 	i = 0;
 	while (i < 100)
     {
+		if ((int)posY >= ft_tablen(cub->map) || (int)posX >= ft_strlen(cub->map[(int)posY]))
+			break ;
 		if (cub->map[(int)posY][(int)posX] == '1')
         {
             return(euc_distance((double)cub->player->x, (double)cub->player->y, \
@@ -54,13 +56,13 @@ double	*distances(t_cub *cub)
 	double	*distances;
 
 	i = 0;
-	delta = FOV / WIDTH;
+	delta = (double)FOV / (double)WIDTH;
 	distances = collect(sizeof(double) * WIDTH);
 	if (!distances)
 		return (0);
 	while (i < WIDTH)
 	{
-		angle = FOV - (FOV / 2) + (i * delta);
+		angle = (double)FOV - ((double)FOV / 2) + (i * delta);
 		distances[i] = castRay(cub, angle);
 		i++;
 	}

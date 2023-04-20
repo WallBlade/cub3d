@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 	double	*test = distances(cub);
 	for (int i = 0; i < WIDTH; i++)
 		printf("i: %d, dist: %f\n", i, test[i]);
+	(void)test;
 	free_gc();
 	return (0);
 }

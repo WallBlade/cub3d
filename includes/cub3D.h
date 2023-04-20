@@ -97,7 +97,7 @@ char		*get_next_line(int fd);
 t_cub		*init_cub(char *arg);
 void		init_mlx(t_cub *cub);
 t_player	*player_data(char **map);
-double			determine_angle(char c);
+double		determine_angle(char c);
 int			is_player(char c);
 
 
