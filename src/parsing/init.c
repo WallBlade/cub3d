@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/24 15:04:46 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/24 15:43:46 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_player(char c)
 {
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'O');
+	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
 double	determine_angle(char c)
@@ -23,7 +23,7 @@ double	determine_angle(char c)
 		return (0.0);
 	else if (c == 'N')
 		return (90.0);
-	else if (c == 'O')
+	else if (c == 'W')
 		return (180.0);
 	else if (c == 'S')
 		return (270.0);
