@@ -17,7 +17,9 @@
 # define FALSE 0
 # define BUFFER_SIZE 42
 # define WIDTH 720
+# define GREEN 0x00FF00
 # define HEIGHT 1080
+# define WALL_H 200
 # define FOV 90
 # define NO 0
 # define SO 1
@@ -64,6 +66,9 @@ typedef struct s_cub
 	char		**map;
 	void		*mlx_ptr;
 	void		*win_ptr;
+	double		plane_dist;
+	double		*distances;
+	double		*heights;
 	t_mlx		*bg;
 	t_mlx		*imgs;
 	t_player	*player;
@@ -122,6 +127,7 @@ int			get_colors(char **file, int type);
 double 	euc_distance(double x1, double y1, double x2, double y2);
 double	castRay(t_cub *cub, double angle);
 double	*distances(t_cub *cub);
+double	*get_heights(t_cub *cub);
 
 
 /*--------------------------Events--------------------------*/
@@ -142,5 +148,6 @@ int			map_elem(char **map);
 /*---------------------------Draw---------------------------*/
 
 int			render(t_cub *cub);
+void 		render_walls(t_cub *cub);
 
 #endif

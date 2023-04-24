@@ -28,7 +28,7 @@ double	castRay(t_cub *cub, double angle)
     int i;
 
 	posX = (double)(cub->player->x);
-	posY = (double)cub->player->y;
+	posY = (double)(cub->player->y);
 	dx = sin(angle * PI / 180);
 	dy = cos(angle * PI / 180);
 	i = 0;
@@ -67,4 +67,21 @@ double	*distances(t_cub *cub)
 		i++;
 	}
 	return (distances);
+}
+
+double	*get_heights(t_cub *cub)
+{
+	double	*heights;
+	int		i;
+
+	i = 0;
+	heights = collect(sizeof(double) * WIDTH);
+	if (!heights)
+		return (NULL);
+	while (i < WIDTH)
+	{
+		heights[i] = ((double)WALL_H * cub->distances[i]) / cub->plane_dist;
+		i++;
+	}
+	return (heights);
 }

@@ -6,7 +6,7 @@
 /*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/20 13:43:38 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/24 15:04:46 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ t_cub	*init_cub(char *arg)
 	cub->bg = collect(sizeof(t_cub));
 	cub->imgs = NULL;
 	cub->player = player_data(cub->map);
+	cub->plane_dist = ((double)WIDTH / 2) / tan((double)FOV / 2);
+	
 	return (cub);
 }
 
