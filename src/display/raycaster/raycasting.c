@@ -29,8 +29,8 @@ double	castRay(t_cub *cub, double angle)
 
 	posX = (double)(cub->player->x);
 	posY = (double)(cub->player->y);
-	dx = sin(angle * PI / 180);
-	dy = cos(angle * PI / 180);
+	dx = -cos(angle * PI / 180);
+	dy = -sin(angle * PI / 180);
 	i = 0;
 	while (i < 100)
     {

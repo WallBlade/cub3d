@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:18:45 by smessal           #+#    #+#             */
-/*   Updated: 2023/04/24 15:29:12 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/24 16:36:31 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	draw_background(t_cub *cub)
 		x = 0;
 		while (x < 1080)
 		{
-			if (y > 720 / 2)
+			if (y < 720 / 2)
 				my_mlx_pixel_put(cub->bg, x, y, cub->ceiling);
 			else
 				my_mlx_pixel_put(cub->bg, x, y, cub->floor);
@@ -45,7 +45,7 @@ void	draw_background(t_cub *cub)
 
 int	render(t_cub *cub)
 {
-	// draw_background(cub);
+	draw_background(cub);
 	render_walls(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, \
 		cub->bg->img_ptr, 0, 0);
@@ -66,21 +66,18 @@ void render_walls(t_cub *cub)
     {
         // Calculate the height of the wall
         wall_height = (double)HEIGHT / cub->heights[x];
-        wall_top = (HEIGHT - WALL_H) / 2;
+        wall_top = (HEIGHT - wall_height) / 2;
         wall_bottom = wall_top + wall_height;
 
         // Draw the wall
         for (y = 0; y < HEIGHT; y++)
         {
-            if (y < wall_top) // Ceiling
-                color = cub->ceiling;
-            else if (y >= wall_top && y < wall_bottom) // Wall
-                color = GREEN << 8;
-            else // Floor
-                color = cub->floor;
-
-            my_mlx_pixel_put(cub->mlx_ptr, x, y, color);
-        }
+            if (y >= wall_top && y < wall_bottom) // Wall
+			{
+                color = GREEN;
+            	my_mlx_pixel_put(cub->bg, x, y, color);
+			}
+		}
     }
 }
 

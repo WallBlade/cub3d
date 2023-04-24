@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/24 15:43:46 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/24 15:51:36 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,10 @@ void	init_mlx(t_cub *cub)
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
 		return ;
-	cub->win_ptr = mlx_new_window(cub->mlx_ptr, HEIGHT, WIDTH, "CUB");
+	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WIDTH, HEIGHT, "CUB");
 	if (!cub->win_ptr)
 		return (free(cub->win_ptr));
-	cub->bg->img_ptr = mlx_new_image(cub->mlx_ptr, HEIGHT, WIDTH);
+	cub->bg->img_ptr = mlx_new_image(cub->mlx_ptr, WIDTH, HEIGHT);
 	cub->bg->addr= mlx_get_data_addr(cub->bg->img_ptr, &cub->bg->bpp, \
 						&cub->bg->line_len, &cub->bg->endian);
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_keypress, cub);
