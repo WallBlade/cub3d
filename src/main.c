@@ -23,8 +23,10 @@ int	main(int argc, char **argv)
 	if (!map_closed(cub->map) || !map_elem(cub->map))
 		printf("Not closed\n");
 	cub->distances = distances(cub);
-	cub->heights = get_heights(cub);
-	init_mlx(cub);
+	for (int i = 0; i < WIDTH; i++)
+		printf("screen_x: %d, %f\n", i,cub->distances[i]);
+	// cub->heights = get_heights(cub);
+	// init_mlx(cub);
 	free_gc();
 	return (0);
 }

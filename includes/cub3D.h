@@ -140,6 +140,9 @@ double 	euc_distance(double x1, double y1, double x2, double y2);
 double	castRay(t_cub *cub, double angle);
 double	*distances(t_cub *cub);
 double	*get_heights(t_cub *cub);
+double	euc_distance(double x1, double y1, double x2, double y2);
+void	get_next_vertical_point(double *x, double *y, double dy, double angle);
+void	get_next_horizontal_point(double *x, double *y, double dx, double angle);
 
 
 /*--------------------------Events--------------------------*/

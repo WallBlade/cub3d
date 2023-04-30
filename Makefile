@@ -1,7 +1,7 @@
 SRCS 	=	src/parsing/parsing.c src/parsing/get_next_line.c src/parsing/garbage_collector.c \
 			src/parsing/parsing_utils.c src/parsing/err_map_closed.c src/parsing/init.c src/utils/utils.c \
 			src/parsing/err_map_elem.c src/display/background/draw.c src/display/background/events.c \
-			src/display/raycaster/raycasting.c \
+			src/display/raycaster/raycasting.c src/display/raycaster/raycasting_utils.c\
 			src/main.c \
 
 OBJ		=	$(SRCS:.c=.o)

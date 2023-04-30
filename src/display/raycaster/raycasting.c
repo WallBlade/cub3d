@@ -23,8 +23,8 @@ t_ray	*init_ray(t_cub *cub, double angle)
 	ray->posY_h = cub->player->y;
 	ray->posX_v = cub->player->x;
 	ray->posY_v = cub->player->y;
-	ray->dx = sin(angle * PI / 180);
-	ray->dy = cos(angle * PI / 180);
+	ray->dy = (1 / sin(angle * PI / 180)) * sin(angle * PI / 180);
+	ray->dx = (1 / sin(angle * PI / 180)) * cos(angle * PI / 180);
 	return (ray);
 }
 
@@ -37,8 +37,14 @@ double	castRay(t_cub *cub, double angle)
 		return (0);
 	while (1)
 	{
-		if 
+		get_next_horizontal_point(&ray->posX_h, &ray->posY_h, ray->dx);
+		get_next_vertical_point(&ray->posX_v, &ray->posY_v, ray->dy);
+		if (cub->map[(int)ray->posY_h][(int)ray->posX_h] == '1')
+			return (free(ray), euc_distance(ray->posX_h, ray->posY_h, cub->player->x, cub->player->y));
+		else if (cub->map[(int)ray->posY_v][(int)ray->posX_v] == '1')
+			return (free(ray), euc_distance(ray->posX_h, ray->posY_h, cub->player->x, cub->player->y));
 	}
+	return (0);
 }
 
 double	*distances(t_cub *cub)
@@ -53,10 +59,16 @@ double	*distances(t_cub *cub)
 	distances = malloc(sizeof(double) * WIDTH);
 	if (!distances)
 		return (0);
+	angle = cub->player->angle + (double)FOV / 2;
 	while (i < WIDTH)
 	{
-		angle = (double)FOV - ((double)FOV / 2) + (i * delta);
+		if (angle < 0)
+			angle += 360;
+		else if (angle > 360)
+			angle -= 360;
+		// printf("angle: %f\n", angle);
 		distances[i] = castRay(cub, angle);
+		angle -= delta;
 		i++;
 	}
 	return (distances);
