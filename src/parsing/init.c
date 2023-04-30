@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/24 15:51:36 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/04/30 15:49:09 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ double	determine_angle(char c)
 	if (c == 'E')
 		return (0.0);
 	else if (c == 'N')
-		return (90.0);
+		return (270.0);
 	else if (c == 'W')
 		return (180.0);
 	else if (c == 'S')
-		return (270.0);
+		return (90.0);
 	else
 		return (-1);
 }
@@ -50,7 +50,9 @@ t_player	*player_data(char **map)
 			{	
 				player->x = x;
 				player->y = y;
-				player->angle = determine_angle(map[y][x]);
+				player->angle = determine_angle(map[y][x]) - 30;
+				if (player->angle < 0)
+					player->angle += 360;
 				break ;
 			}
 			x++;
@@ -85,7 +87,6 @@ t_cub	*init_cub(char *arg)
 	cub->imgs = NULL;
 	cub->player = player_data(cub->map);
 	cub->plane_dist = ((double)WIDTH / 2) / tan((double)FOV / 2);
-	
 	return (cub);
 }
 

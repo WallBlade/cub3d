@@ -12,40 +12,33 @@
 
 #include "cub3D.h"
 
-double euc_distance(double x1, double y1, double x2, double y2)
+t_ray	*init_ray(t_cub *cub, double angle)
 {
-    double dx = x2 - x1;
-    double dy = y2 - y1;
-    return sqrt(dx * dx + dy * dy);
+	t_ray	*ray;
+
+	ray = malloc(sizeof(t_ray));
+	if (!ray)
+		return (NULL);
+	ray->posX_h = cub->player->x;
+	ray->posY_h = cub->player->y;
+	ray->posX_v = cub->player->x;
+	ray->posY_v = cub->player->y;
+	ray->dx = sin(angle * PI / 180);
+	ray->dy = cos(angle * PI / 180);
+	return (ray);
 }
 
 double	castRay(t_cub *cub, double angle)
 {
-    double	dx;
-    double	dy;
-    double	posX;
-    double	posY;
-    int i;
+	t_ray	*ray;
 
-	posX = (double)(cub->player->x);
-	posY = (double)(cub->player->y);
-	dx = -cos(angle * PI / 180);
-	dy = -sin(angle * PI / 180);
-	i = 0;
-	while (i < 100)
-    {
-		if ((int)posY >= ft_tablen(cub->map) || (int)posX >= ft_strlen(cub->map[(int)posY]))
-			break ;
-		if (cub->map[(int)posY][(int)posX] == '1')
-        {
-            return(euc_distance((double)cub->player->x, (double)cub->player->y, \
-				posX, posY) * cos((angle - cub->player->angle) * PI / 180));
-        }
-        posX += dx;
-        posY += dy;
-        i++;
-    }
-	return (10000);
+	ray = init_ray(cub, angle);
+	if (!ray)
+		return (0);
+	while (1)
+	{
+		if 
+	}
 }
 
 double	*distances(t_cub *cub)
@@ -57,7 +50,7 @@ double	*distances(t_cub *cub)
 
 	i = 0;
 	delta = (double)FOV / (double)WIDTH;
-	distances = collect(sizeof(double) * WIDTH);
+	distances = malloc(sizeof(double) * WIDTH);
 	if (!distances)
 		return (0);
 	while (i < WIDTH)

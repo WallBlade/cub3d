@@ -19,7 +19,7 @@
 # define WIDTH 1080
 # define HEIGHT 720
 # define GREEN 0x00FF00
-# define WALL_H 200
+# define WALL_H 500
 # define FOV 90
 # define NO 0
 # define SO 1
@@ -39,6 +39,17 @@
 # include <X11/X.h>
 # include "../mlx_linux/mlx.h"
 # include "../libft/libft.h"
+
+typedef struct s_ray
+{
+	double	dy;
+	double	dx;
+	double	posX_v;
+	double	posY_v;
+	double	posX_h;
+	double	posY_h;
+}		t_ray;
+
 
 typedef struct s_mlx
 {
@@ -69,6 +80,7 @@ typedef struct s_cub
 	double		plane_dist;
 	double		*distances;
 	double		*heights;
+	t_ray		*ray;
 	t_mlx		*bg;
 	t_mlx		*imgs;
 	t_player	*player;
