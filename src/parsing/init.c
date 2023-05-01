@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/30 17:12:10 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/30 17:53:20 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ t_player	*player_data(char **map)
 				player->x = x;
 				player->y = y;
 				player->angle = determine_angle(map[y][x]);
-				if (player->angle < 0)
-					player->angle += 360;
 				break ;
 			}
 			x++;

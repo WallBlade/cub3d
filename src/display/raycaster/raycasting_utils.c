@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:51:07 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/30 17:19:21 by smessal          ###   ########.fr       */
+/*   Updated: 2023/04/30 18:20:05 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,48 @@ double euc_distance(double x1, double y1, double x2, double y2)
 
 void	get_next_vertical_point(double *x, double *y, double dy, double angle)
 {
-	if (angle <= )
-	*x -= 1;
-	*y += dy;
+	if (angle >= 270 && angle <= 360)
+	{
+		*x += 1;
+		*y += dy;
+	}
+	else if (angle >= 180 && angle <= 270)
+	{
+		*x -= 1;
+		*y -= dy;
+	}
+	else if (angle >= 90 && angle <= 180)
+	{
+		*x -= 1;
+		*y += dy;
+	}
+	else if (angle >= 0 && angle <= 90)
+	{
+		*x += 1;
+		*y += dy;
+	}
 }
 
 void	get_next_horizontal_point(double *x, double *y, double dx, double angle)
 {
-	*y += 1;
-	*x -= dx;
+	if (angle >= 270 && angle <= 360)
+	{
+		*y -= 1;
+		*x += dx;
+	}
+	else if (angle >= 180 && angle <= 270)
+	{
+		*y -= 1;
+		*x -= dx;
+	}
+	else if (angle >= 90 && angle <= 180)
+	{
+		*y += 1;
+		*x -= dx;
+	}
+	else if (angle >= 0 && angle <= 90)
+	{
+		*y += 1;
+		*x += dx;
+	}
 }

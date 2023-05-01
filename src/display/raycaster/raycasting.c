@@ -19,12 +19,13 @@ t_ray	*init_ray(t_cub *cub, double angle)
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
 		return (NULL);
-	ray->posX_h = cub->player->x;
-	ray->posY_h = cub->player->y;
-	ray->posX_v = cub->player->x;
-	ray->posY_v = cub->player->y;
-	ray->dy = (1 / sin(angle * PI / 180)) * sin(angle * PI / 180);
+	ray->posX_h = (double)cub->player->x;
+	ray->posY_h = (double)cub->player->y;
+	ray->posX_v = (double)cub->player->x;
+	ray->posY_v = (double)cub->player->y;
 	ray->dx = (1 / sin(angle * PI / 180)) * cos(angle * PI / 180);
+	ray->dy = (1 / cos(angle * PI / 180)) * sin(angle * PI / 180);
+	printf("dx = %f\tdy = %f\tangle = %f\n", ray->dx, ray->dy, angle);
 	return (ray);
 }
 
@@ -37,12 +38,14 @@ double	castRay(t_cub *cub, double angle)
 		return (0);
 	while (1)
 	{
-		get_next_horizontal_point(&ray->posX_h, &ray->posY_h, ray->dx);
-		get_next_vertical_point(&ray->posX_v, &ray->posY_v, ray->dy);
-		if (cub->map[(int)ray->posY_h][(int)ray->posX_h] == '1')
-			return (free(ray), euc_distance(ray->posX_h, ray->posY_h, cub->player->x, cub->player->y));
-		else if (cub->map[(int)ray->posY_v][(int)ray->posX_v] == '1')
-			return (free(ray), euc_distance(ray->posX_h, ray->posY_h, cub->player->x, cub->player->y));
+		get_next_horizontal_point(&ray->posX_h, &ray->posY_h, ray->dx, angle);
+		get_next_vertical_point(&ray->posX_v, &ray->posY_v, ray->dy, angle);
+		// printf("posY_v : %d\tposX_v : %d\tmap = %c\n", (int)floor(ray->posY_v), (int)floor(ray->posX_v), cub->map[(int)floor(ray->posY_v)][(int)floor(ray->posX_v)]);
+		// printf("posY_v : %f\tposX_v : %f\n", ray->posY_v, ray->posX_v);
+		if (cub->map[(int)floor(ray->posY_h)][(int)floor(ray->posX_h)] == '1')
+			return (euc_distance(ray->posX_h, ray->posY_h, cub->player->x, cub->player->y));
+		else if (cub->map[(int)floor(ray->posY_v)][(int)floor(ray->posX_v)] == '1')
+			return (euc_distance(ray->posX_v, ray->posY_v, cub->player->x, cub->player->y));
 	}
 	return (0);
 }
