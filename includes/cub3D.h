@@ -48,6 +48,7 @@ typedef struct s_ray
 	double	posY_v;
 	double	posX_h;
 	double	posY_h;
+	double	angle;
 }		t_ray;
 
 
@@ -141,9 +142,8 @@ double	castRay(t_cub *cub, double angle);
 double	*distances(t_cub *cub);
 double	*get_heights(t_cub *cub);
 double	euc_distance(double x1, double y1, double x2, double y2);
-void	get_next_vertical_point(double *x, double *y, double dy, double angle);
-void	get_next_horizontal_point(double *x, double *y, double dx, double angle);
-
+void	get_next_vertical_point(t_ray *ray);
+void	get_next_horizontal_point(t_ray *ray);
 
 /*--------------------------Events--------------------------*/
 
