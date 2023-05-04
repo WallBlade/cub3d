@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:26:09 by smessal           #+#    #+#             */
-/*   Updated: 2023/04/20 13:10:42 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/04 17:40:00 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	handle_keypress(int keysym, t_cub *cub)
 {
-	if (keysym)
-		printf("test\n");
 	if (keysym == XK_Escape)
 	{
 		if (cub->bg->img_ptr)
