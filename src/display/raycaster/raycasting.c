@@ -12,23 +12,6 @@
 
 #include "cub3D.h"
 
-t_ray	*init_ray(t_cub *cub, double angle)
-{
-	t_ray	*ray;
-
-	ray = malloc(sizeof(t_ray));
-	if (!ray)
-		return (NULL);
-	ray->posX_h = (double)cub->player->x;
-	ray->posY_h = (double)cub->player->y;
-	ray->posX_v = (double)cub->player->x;
-	ray->posY_v = (double)cub->player->y;
-	ray->dx = fabs((1 / sin(angle * PI / 180)) * cos(angle * PI / 180));
-	ray->dy = fabs((1 / cos(angle * PI / 180)) * sin(angle * PI / 180));
-	ray->angle = angle;
-	return (ray);
-}
-
 double	castRay_h(t_cub *cub, t_ray *ray)
 {
 	double	posX;
@@ -37,34 +20,23 @@ double	castRay_h(t_cub *cub, t_ray *ray)
 	
 	while (1)
 	{
-		get_next_horizontal_point(ray);
-		if (ray->angle >= 0 && ray->angle <= 90)
-		{
-			posX = floor(ray->posX_h);
-			posY = round(ray->posY_h);
-		}
-		else if (ray->angle > 90 && ray->angle <= 180)
-		{
-			posX = floor(ray->posX_h);
-			posY = round(ray->posY_h);
-		}
-		else if (ray->angle > 180 && ray->angle <= 270)
-		{
-			posX = floor(ray->posX_h);
+		posX = floor(ray->posX_h);
+		if (ray->angle >= 0 && ray->angle <= 180)
 			posY = round(ray->posY_h) - 1;
-		}
 		else
-		{
-			posX = floor(ray->posX_h);
-			posY = round(ray->posY_h) - 1;
-		}
-		if ((int)posY >= 0 && (int)posY < ft_tablen(cub->map) && (int)posX >= 0 && (int)posX < ft_strlen(cub->map[(int)posY]))
+			posY = round(ray->posY_h);
+		if ((int)posY >= 0 && (int)posY < ft_tablen(cub->map) && (int)posX >= 0
+			&& (int)posX < ft_strlen(cub->map[(int)posY]))
 		{
 			if (cub->map[(int)posY][(int)posX] == '1')
+			{
+				printf("pos_h: (%d, %d)\n", (int)posY, (int)posX);
 				return (euc_distance(ray->posX_h, ray->posY_h, cub->player->x, cub->player->y));
+			}
 		}
 		else
 			return (-1);
+		get_next_horizontal_point(ray);
 	}
 }
 
@@ -75,34 +47,23 @@ double	castRay_v(t_cub *cub, t_ray *ray)
 
 	while (1)
 	{
-		get_next_vertical_point(ray);
-		if (ray->angle >= 0 && ray->angle <= 90)
-		{
-			posX = round(ray->posX_v);
-			posY = floor(ray->posY_v);
-		}
-		else if (ray->angle > 90 && ray->angle <= 180)
-		{
+		posY = floor(ray->posY_v);
+		if (ray->angle > 90 && ray->angle <= 270)
 			posX = round(ray->posX_v) - 1;
-			posY = floor(ray->posY_v);
-		}
-		else if (ray->angle > 180 && ray->angle <= 270)
-		{
-			posX = round(ray->posX_v) - 1;
-			posY = floor(ray->posY_v);
-		}
 		else
-		{
 			posX = round(ray->posX_v);
-			posY = floor(ray->posY_v);
-		}
-		if ((int)posY >= 0 && (int)posY < ft_tablen(cub->map) && (int)posX >= 0 && (int)posX < ft_strlen(cub->map[(int)posY]))
+		if ((int)posY >= 0 && (int)posY < ft_tablen(cub->map) && (int)posX >= 0
+			&& (int)posX < ft_strlen(cub->map[(int)posY]))
 		{
 			if (cub->map[(int)posY][(int)posX] == '1')
+			{
+				printf("pos_v: (%d, %d)\n", (int)posY, (int)posX);
 				return (euc_distance(ray->posX_v, ray->posY_v, cub->player->x, cub->player->y));
+			}
 		}
 		else
 			return (-1);
+		get_next_vertical_point(ray);
 	}
 }
 
@@ -115,25 +76,28 @@ double	castRay(t_cub *cub, double angle)
 	ray = init_ray(cub, angle);
 	if (!ray)
 		return (0);
+	printf("player pos (%f, %f)\tfirst intersect horiz: (%f, %f)\n", cub->player->x, cub->player->y, ray->posX_h, ray->posY_h);
+	printf("player pos (%f, %f)\tfirst intersect vert: (%f, %f)\n", cub->player->x, cub->player->y, ray->posX_v, ray->posY_v);
 	h_dist = castRay_h(cub, ray);
 	v_dist = castRay_v(cub, ray);
 	if (v_dist >= 0 && h_dist >= 0)
 	{
-		if (v_dist > h_dist)
-			return (h_dist);
+		if (v_dist >= h_dist)
+			return (printf("h_dist\n"), h_dist);
 		else
-			return (v_dist);
+			return (printf("v_dist\n"), v_dist);
 	}
 	if (v_dist < 0 && h_dist >= 0)
-		return (h_dist);
+		return (printf("h_dist\n"), h_dist);
 	if (h_dist < 0 && v_dist >= 0)
-		return (v_dist);
+		return (printf("v_dist\n"), v_dist);
 	return (100);
 }
 
 double	*distances(t_cub *cub)
 {
 	int		i;
+	// double	diff;
 	double	angle;
 	double	delta;
 	double	*distances;
@@ -150,7 +114,10 @@ double	*distances(t_cub *cub)
 			angle += 360;
 		else if (angle > 360)
 			angle -= 360;
-		distances[i] = castRay(cub, angle) * cos((cub->player->angle - angle) * PI / 180);
+		// diff = cos((angle - cub->player->angle) * PI / 180);
+		// if (diff < 0)
+		// 	diff += 360;
+		distances[i] = castRay(cub, angle);
 		printf("i: %d distance: %f\n", i ,distances[i]);
 		angle -= delta;
 		i++;
@@ -162,29 +129,15 @@ double	*get_heights(t_cub *cub)
 {
 	double	*heights;
 	int		i;
-	int		j;
 
-	i = WIDTH - 1;
-	j = 0;
+	i = 0;
 	heights = collect(sizeof(double) * WIDTH);
 	if (!heights)
 		return (NULL);
-	while (i >= 0)
+	while (i < WIDTH)
 	{
-		heights[j] = ((double)WALL_H * cub->distances[i]) / (double)HEIGHT;
-		i--;
-		j++;
+		heights[i] = ((double)WALL_H * cub->distances[i]) / 360;
+		i++;
 	}
 	return (heights);
 }
-
-// if ((int)floor(ray->posY_h) < 0 || (int)floor(ray->posY_h) >= ft_tablen(cub->map) || (int)floor(ray->posX_h) < 0 || (int)floor(ray->posX_h) >= ft_strlen(cub->map[0]))
-// {
-// 	printf("outY_float: %f outY_dec: %d\toutX_float: %f outY_dec:%d\n", ray->posY_h, (int)floor(ray->posY_h), ray->posX_h,(int)floor(ray->posX_h) );
-// 	return (-1);
-// }
-// if ((int)floor(ray->posY_v) < 0 || (int)floor(ray->posY_v) >= ft_tablen(cub->map) || (int)floor(ray->posX_v) < 0 || (int)floor(ray->posX_v) >= ft_strlen(cub->map[0]))
-// {
-// 	printf("outY_float: %f outY_dec: %d\toutX_float: %f outY_dec:%d\n", ray->posY_v, (int)floor(ray->posY_v), ray->posX_v,(int)floor(ray->posX_v) );
-// 	return (-1);
-// }

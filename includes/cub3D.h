@@ -49,6 +49,8 @@ typedef struct s_ray
 	double	posX_h;
 	double	posY_h;
 	double	angle;
+	double	f_dx;
+	double	f_dy;
 }		t_ray;
 
 
@@ -65,8 +67,8 @@ typedef struct s_mlx
 
 typedef struct s_player
 {
-	int		x;
-	int		y;
+	double	x;
+	double	y;
 	double	angle;
 }		t_player;
 
@@ -135,6 +137,7 @@ char		**get_file(int fd, int count);
 char		**get_map(char **file);
 char		**get_paths(char **file);
 int			get_colors(char **file, int type);
+
 /*-----------------------Raycasting-------------------------*/
 
 double 	euc_distance(double x1, double y1, double x2, double y2);
@@ -144,6 +147,7 @@ double	*get_heights(t_cub *cub);
 double	euc_distance(double x1, double y1, double x2, double y2);
 void	get_next_vertical_point(t_ray *ray);
 void	get_next_horizontal_point(t_ray *ray);
+t_ray	*init_ray(t_cub *cub, double angle);
 
 /*--------------------------Events--------------------------*/
 

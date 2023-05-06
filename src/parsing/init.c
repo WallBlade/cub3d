@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/02 15:04:59 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/06 17:22:39 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ double	determine_angle(char c)
 	if (c == 'E')
 		return (0.0);
 	else if (c == 'N')
-		return (270.0);
+		return (90.0);
 	else if (c == 'W')
 		return (180.0);
 	else if (c == 'S')
-		return (90.0);
+		return (270.0);
 	else
 		return (-1);
 }
@@ -48,8 +48,8 @@ t_player	*player_data(char **map)
 		{
 			if (is_player(map[y][x]))
 			{	
-				player->x = x;
-				player->y = y;
+				player->x = x + 0.5;
+				player->y = y + 0.5;
 				player->angle = determine_angle(map[y][x]);
 				break ;
 			}
