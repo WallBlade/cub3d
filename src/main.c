@@ -22,11 +22,7 @@ int	main(int argc, char **argv)
 	cub = init_cub(argv[1]);
 	if (!map_closed(cub->map) || !map_elem(cub->map))
 		printf("Not closed\n");
-	cub->distances = distances(cub);
-	// for (int i = 0; i < WIDTH; i++)
-	// {
-	// 	printf("i: %d\tdist: %f\n", i, cub->distances[i]);
-	// }
+	cub->distances = cast_ray(cub);
 	cub->heights = get_heights(cub);
 	init_mlx(cub);
 	free_gc();

@@ -19,7 +19,7 @@ char	**get_file(int fd, int count)
 	char	**file;
 
 	i = 0;
-	file = collect(sizeof(char *) * (count + 1));
+	file = malloc(sizeof(char *) * (count + 1));
 	if (!file)
 		return (close(fd), NULL);
 	while (i < count)
@@ -30,7 +30,8 @@ char	**get_file(int fd, int count)
 			break ;
 		else if (line[0] != '\0' && line[0] != '\n')
 		{
-			line[ft_strlen(line) - 1] = '\0';
+			if (line[ft_strlen(line) - 1] == '\n')
+				line[ft_strlen(line) - 1] = '\0';
 			file[i++] = ft_strdup(line);
 		}
 	}
@@ -57,29 +58,31 @@ char	**get_map(char **file)
 	return (map);
 }
 
-char	**get_paths(char **file)
+char	**get_assets(char **file)
 {
 	int		i;
-	char	**paths;
+	char	**assets;
 
 	i = 0;
-	paths = collect(sizeof(char *) * 5);
-	if (!paths)
+	assets = collect(sizeof(char *) * 5);
+	if (!assets)
 		return (NULL);
-	while (file[i])
+	while (i < 6)
 	{
 		if (is_data(file[i]) == 1)
-			paths[NO] = clean_data(file[i]);
+			assets[NO] = clean_data(file[i]);
 		else if (is_data(file[i]) == 2)
-			paths[SO] = clean_data(file[i]);
+			assets[SO] = clean_data(file[i]);
 		else if (is_data(file[i]) == 3)
-			paths[WE] = clean_data(file[i]);
+			assets[WE] = clean_data(file[i]);
 		else if (is_data(file[i]) == 4)
-			paths[EA] = clean_data(file[i]);
+			assets[EA] = clean_data(file[i]);
 		i++;
 	}
-	paths[4] = NULL;
-	return (paths);
+	assets[4] = NULL;
+	if (!assets[0] || !assets[1] || !assets[2] || !assets[3])
+		print_error("Error\nFailed loading textures", NULL);
+	return (assets);
 }
 
 int	get_colors(char **file, int type)
@@ -89,7 +92,7 @@ int	get_colors(char **file, int type)
 
 	i = 0;
 	tab = 0;
-	while (file[i])
+	while (i < 6)
 	{
 		if (is_data(file[i]) == 5 && type == 1)
 			tab = convert_colors(clean_data(file[i]));
@@ -97,5 +100,19 @@ int	get_colors(char **file, int type)
 			tab = convert_colors(clean_data(file[i]));
 		i++;
 	}
+	if (tab < 0)
+		print_error("Error\nFailed loading colors", NULL);
 	return (tab);
+}
+
+void	get_data(int fd, int count, t_cub *cub)
+{
+	char	**file;
+
+	file = get_file(fd, count);
+	cub->assets = get_assets(file);
+	cub->floor = get_colors(file, 1);
+	cub->ceiling = get_colors(file, 2);
+	cub->map = get_map(file);
+	close(fd);
 }

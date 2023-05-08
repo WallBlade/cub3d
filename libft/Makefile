@@ -6,7 +6,7 @@
 #    By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/12 15:23:51 by smessal           #+#    #+#              #
-#    Updated: 2023/04/13 08:56:29 by zel-kass         ###   ########.fr        #
+#    Updated: 2023/05/08 17:08:59 by zel-kass         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ BONUS			=	ft_lstnew_bonus.c ft_lstadd_front_bonus.c \
 					ft_lstsize_bonus.c ft_lstlast_bonus.c \
 					ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 					ft_lstclear_bonus.c ft_lstiter_bonus.c \
-					ft_lstmap_bonus.c
+					ft_lstmap_bonus.c \
 
 BONUS_OBJS		= $(BONUS:.c=.o)
 

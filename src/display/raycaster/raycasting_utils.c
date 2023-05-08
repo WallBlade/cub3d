@@ -6,117 +6,61 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:51:07 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/06 17:31:53 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:14:45 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-double	get_first_horiz(t_cub *cub, t_ray *ray)
+void	init_ray2(t_cub *cub, double cameraX, t_ray *ray)
 {
-	double	x_incr;
-
-	if (ray->f_dy > 0)
-	{
-		x_incr = ray->f_dx * (cub->player->y - floor(cub->player->y));
-		ray->posY_h = floor(cub->player->y);
-	}
+	ray->dir.x = cub->player->dir.x + cub->player->plane.x * cameraX;
+	ray->dir.y = cub->player->dir.y + cub->player->plane.y * cameraX;
+	ray->pos.x = cub->player->x;
+	ray->pos.y = cub->player->y;
+	ray->mapX = cub->player->mapX;
+	ray->mapY = cub->player->mapY;
+	ray->sideX = 0;
+	ray->sideY = 0;
+	ray->stepX = 0;
+	ray->stepY = 0;
+	if (ray->dir.x == 0)
+		ray->dx = INFINITY;
 	else
-	{
-		x_incr = ray->f_dx * (ceil(cub->player->y) - cub->player->y);
-		ray->posY_h = ceil(cub->player->y);
-	}
-	ray->posX_h = cub->player->x + x_incr;
-	return (euc_distance(ray->posX_h, ray->posY_h, cub->player->x, cub->player->y));
+		ray->dx = fabs(1 / ray->dir.x);
+	if (ray->dir.y == 0)
+		ray->dy = INFINITY;
+	else
+		ray->dy = fabs(1 / ray->dir.y);
 }
 
-double	get_first_vert(t_cub *cub, t_ray *ray)
-{
-	double	y_incr;
-
-	if (ray->f_dx > 0)
-	{
-		y_incr = ray->f_dy * (ceil(cub->player->x) - cub->player->x);
-		ray->posX_v = ceil(cub->player->x);
-	}
-	else
-	{
-		y_incr = ray->f_dy * (cub->player->x - floor(cub->player->x));
-		ray->posX_v = floor(cub->player->x);
-	}
-	ray->posY_v = cub->player->y + y_incr;
-	return (euc_distance(ray->posX_v, ray->posY_v, cub->player->x, cub->player->y));
-}
-
-t_ray	*init_ray(t_cub *cub, double angle)
+t_ray	*init_ray(t_cub *cub, double cameraX)
 {
 	t_ray	*ray;
 
 	ray = malloc(sizeof(t_ray));
 	if (!ray)
 		return (NULL);
-	ray->f_dx = cos(angle * PI / 180);
-	ray->f_dy = sin(angle * PI / 180);
-	ray->dx = fabs((1 / ray->f_dy) * ray->f_dx);
-	ray->dy = fabs((1 / ray->f_dx) * ray->f_dy);
-	ray->angle = angle;
-	get_first_horiz(cub, ray);
-	get_first_vert(cub, ray);
-	printf("angle: %f dx: %f dy: %f\n", angle, ray->f_dx, ray->f_dy);
+	init_ray2(cub, cameraX, ray);
+	if (ray->dir.x < 0)
+	{
+		ray->stepX = -1;
+		ray->sideX = (ray->pos.x - ray->mapX) * ray->dx;
+	}
+	else
+	{
+		ray->stepX = 1;
+		ray->sideX = (ray->mapX + 1.0 - ray->pos.x) * ray->dx;
+	}
+	if (ray->dir.y < 0)
+	{
+		ray->stepY = -1;
+		ray->sideY = (ray->pos.y - ray->mapY) * ray->dy;
+	}
+	else
+	{
+		ray->stepY = 1;
+		ray->sideY = (ray->mapY + 1.0 - ray->pos.y) * ray->dy;
+	}
 	return (ray);
-}
-
-double euc_distance(double x1, double y1, double x2, double y2)
-{
-    double dx = fabs(x2 - x1);
-    double dy = fabs(y2 - y1);
-    return sqrt(dx * dx + dy * dy);
-}
-
-void	get_next_vertical_point(t_ray *ray)
-{
-	if (ray->angle >= 270 && ray->angle <= 360)
-	{
-		ray->posX_v += 1;
-		ray->posY_v += ray->dy;
-	}
-	else if (ray->angle >= 180 && ray->angle <= 270)
-	{
-		ray->posX_v -= 1;
-		ray->posY_v += ray->dy;
-	}
-	else if (ray->angle >= 90 && ray->angle <= 180)
-	{
-		ray->posX_v -= 1;
-		ray->posY_v -= ray->dy;
-	}
-	else if (ray->angle >= 0 && ray->angle <= 90)
-	{
-		ray->posX_v += 1;
-		ray->posY_v -= ray->dy;
-	}
-}
-
-void	get_next_horizontal_point(t_ray *ray)
-{
-	if (ray->angle >= 270 && ray->angle <= 360)
-	{
-		ray->posY_h += 1;
-		ray->posX_h += ray->dx;
-	}
-	else if (ray->angle >= 180 && ray->angle <= 270)
-	{
-		ray->posY_h += 1;
-		ray->posX_h -= ray->dx;
-	}
-	else if (ray->angle >= 90 && ray->angle <= 180)
-	{
-		ray->posY_h -= 1;
-		ray->posX_h -= ray->dx;
-	}
-	else if (ray->angle >= 0 && ray->angle <= 90)
-	{
-		ray->posY_h -= 1;
-		ray->posX_h += ray->dx;
-	}
 }

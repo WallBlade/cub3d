@@ -3,25 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:53:59 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/04/17 19:55:28 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/08 19:21:26 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-void	print_error(char *str, char *arg)
-{
-	while (*str)
-		write(2, str++, 1);
-	if (arg)
-		while (*arg)
-			write(2, arg++, 1);
-	write(2, "\n", 1);
-	exit(EXIT_FAILURE);
-}
 
 int	check_filename(char *name)
 {
@@ -76,8 +65,8 @@ int	convert_colors(char *color)
 	char	**tmp;
 
 	tmp = ft_split(color, ',');
-	if (!tmp || !tmp[2])
-		return (0);
+	if (!tmp)
+		return (-1);
 	tab[0] = ft_atoi(tmp[0]);
 	tab[1] = ft_atoi(tmp[1]);
 	tab[2] = ft_atoi(tmp[2]);

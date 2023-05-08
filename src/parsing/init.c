@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/06 17:22:39 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/08 19:25:39 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,49 @@ int	is_player(char c)
 	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
 }
 
-double	determine_angle(char c)
+t_pos	determine_dir(char c)
 {
+	t_pos	dir;
+	
 	if (c == 'E')
-		return (0.0);
+	{
+		dir.x = 1;
+		dir.y = 0;
+	}
 	else if (c == 'N')
-		return (90.0);
+	{
+		dir.x = 0;
+		dir.y = -1;
+	}
 	else if (c == 'W')
-		return (180.0);
-	else if (c == 'S')
-		return (270.0);
+	{
+		dir.x = -1;
+		dir.y = 0;
+	}
 	else
-		return (-1);
+	{
+		dir.x = 0;
+		dir.y = 1;
+	}
+	return (dir);
+}
+
+t_pos	determine_plane(t_pos dir)
+{
+	t_pos	plane;
+
+	(void)dir;
+	if (dir.x == 0)
+	{
+		plane.x = dir.y * -1;
+		plane.y = dir.x;
+	}
+	else
+	{
+		plane.x = dir.y;
+		plane.y = dir.x * -1;
+	}
+	return (plane);
 }
 
 t_player	*player_data(char **map)
@@ -50,7 +81,10 @@ t_player	*player_data(char **map)
 			{	
 				player->x = x + 0.5;
 				player->y = y + 0.5;
-				player->angle = determine_angle(map[y][x]);
+				player->mapX = x;
+				player->mapY = y;
+				player->dir = determine_dir(map[y][x]);
+				player->plane = determine_plane(player->dir);
 				break ;
 			}
 			x++;
@@ -65,7 +99,6 @@ t_cub	*init_cub(char *arg)
 	int		fd;
 	t_cub	*cub;
 	int		count;
-	char	**file;
 
 	cub = collect(sizeof(t_cub));
 	if (!cub)
@@ -74,11 +107,7 @@ t_cub	*init_cub(char *arg)
 	fd = open(arg, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
-	file = get_file(fd, count);
-	cub->map = get_map(file);
-	cub->paths = get_paths(file);
-	cub->floor = get_colors(file, 1);
-	cub->ceiling = get_colors(file, 2);
+	get_data(fd, count, cub);
 	cub->mlx_ptr = NULL;
 	cub->win_ptr = NULL;
 	cub->bg = collect(sizeof(t_cub));

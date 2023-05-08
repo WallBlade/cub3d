@@ -6,11 +6,23 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:36:04 by smessal           #+#    #+#             */
-/*   Updated: 2023/04/17 15:40:08 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:57:42 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+void	print_error(char *str, char *arg)
+{
+	while (*str)
+		write(2, str++, 1);
+	if (arg)
+		while (*arg)
+			write(2, arg++, 1);
+	write(2, "\n", 1);
+	free_gc();
+	exit(EXIT_FAILURE);
+}
 
 int	ft_tablen(char **tab)
 {

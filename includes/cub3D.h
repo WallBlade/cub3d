@@ -40,17 +40,26 @@
 # include "../mlx_linux/mlx.h"
 # include "../libft/libft.h"
 
+typedef struct s_pos
+{
+	double	x;
+	double	y;
+}				t_pos;
+
 typedef struct s_ray
 {
 	double	dy;
 	double	dx;
-	double	posX_v;
-	double	posY_v;
-	double	posX_h;
-	double	posY_h;
-	double	angle;
-	double	f_dx;
-	double	f_dy;
+	t_pos	pos;
+	int		mapX;
+	int		mapY;
+	t_pos	dir;
+	int		stepX;
+	int		stepY;
+	double	sideX;
+	double	sideY;
+	double	cameraX;
+	int		side;
 }		t_ray;
 
 
@@ -69,14 +78,17 @@ typedef struct s_player
 {
 	double	x;
 	double	y;
-	double	angle;
+	int		mapX;
+	int		mapY;
+	t_pos	dir;
+	t_pos	plane;
 }		t_player;
 
 typedef struct s_cub
 {
 	int			floor;
 	int			ceiling;
-	char		**paths;
+	char		**assets;
 	char		**map;
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -117,7 +129,8 @@ char		*get_next_line(int fd);
 t_cub		*init_cub(char *arg);
 void		init_mlx(t_cub *cub);
 t_player	*player_data(char **map);
-double		determine_angle(char c);
+t_pos		determine_dir(char c);
+t_pos		determine_plane(t_pos dir);
 int			is_player(char c);
 
 
@@ -137,17 +150,14 @@ char		**get_file(int fd, int count);
 char		**get_map(char **file);
 char		**get_paths(char **file);
 int			get_colors(char **file, int type);
+void		get_data(int fd, int count, t_cub *cub);
 
 /*-----------------------Raycasting-------------------------*/
 
-double 	euc_distance(double x1, double y1, double x2, double y2);
-double	castRay(t_cub *cub, double angle);
-double	*distances(t_cub *cub);
+double	*cast_ray(t_cub *cub);
+t_ray	*init_ray(t_cub *cub, double cameraX);
 double	*get_heights(t_cub *cub);
-double	euc_distance(double x1, double y1, double x2, double y2);
-void	get_next_vertical_point(t_ray *ray);
-void	get_next_horizontal_point(t_ray *ray);
-t_ray	*init_ray(t_cub *cub, double angle);
+
 
 /*--------------------------Events--------------------------*/
 
