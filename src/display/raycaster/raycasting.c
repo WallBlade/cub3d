@@ -63,6 +63,7 @@ double	*cast_ray(t_cub *cub)
 	while (i < WIDTH)
 	{
 		cameraX = 2 * i / (double)WIDTH - 1;
+		printf("cameraX: %f\n", cameraX);
 		ray = init_ray(cub, cameraX);
 		algo_dda(cub, ray);
 		distances[i] = distance(ray);
@@ -76,18 +77,18 @@ double	*get_heights(t_cub *cub)
 {
 	double	*heights;
 	int		i;
-	int		j;
+	// int		j;
 
 	i = 0;
-	j = WIDTH - 1;
+	// j = WIDTH - 1;
 	heights = malloc(sizeof(double) * WIDTH);
 	if (!heights)
 		return (NULL);
 	while (i < WIDTH)
 	{
-		heights[i] = ((double)WALL_H * cub->distances[j]) / 720;
+		heights[i] = ((double)WALL_H * cub->distances[i]) / 720;
 		i++;
-		j--;
+		// j--;
 	}
 	return (heights);
 }
