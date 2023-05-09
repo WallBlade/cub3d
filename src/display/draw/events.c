@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:26:09 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/04 17:40:00 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:11:04 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,10 @@ int	handle_keypress(int keysym, t_cub *cub)
 		free_gc();
 		exit(1);
 	}
+	if (is_move(keysym))
+	{
+		move_player(keysym, cub);
+	}
+	rotate_player(keysym, cub);
 	return (keysym);
 }

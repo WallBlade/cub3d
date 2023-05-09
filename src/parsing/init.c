@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/08 19:25:39 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:26:47 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,8 @@ t_pos	determine_plane(t_pos dir)
 {
 	t_pos	plane;
 
-	(void)dir;
-	if (dir.x == 0)
-	{
-		plane.x = dir.y * -1;
-		plane.y = dir.x;
-	}
-	else
-	{
-		plane.x = dir.y;
-		plane.y = dir.x * -1;
-	}
+	plane.x = dir.y * -1;
+	plane.y = dir.x;
 	return (plane);
 }
 

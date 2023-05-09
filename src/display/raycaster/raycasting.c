@@ -63,7 +63,6 @@ double	*cast_ray(t_cub *cub)
 	while (i < WIDTH)
 	{
 		cameraX = 2 * i / (double)WIDTH - 1;
-		printf("cameraX: %f\n", cameraX);
 		ray = init_ray(cub, cameraX);
 		algo_dda(cub, ray);
 		distances[i] = distance(ray);

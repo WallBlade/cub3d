@@ -163,6 +163,13 @@ double	*get_heights(t_cub *cub);
 
 int			handle_keypress(int keysym, t_cub *cub);
 
+/*---utils----*/
+int			is_move(int keysym);
+void		update_player(t_cub *cub, double incr_x, double incr_y, int option);
+void		move_player(int keysym, t_cub *cub);
+void		rotate_player(int keysym, t_cub *cub);
+
+
 /*--------------------------Utils---------------------------*/
 
 int			ft_tablen(char **tab);

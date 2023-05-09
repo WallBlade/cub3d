@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:18:45 by smessal           #+#    #+#             */
-/*   Updated: 2023/04/24 16:36:31 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:51:43 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	draw_background(t_cub *cub)
 int	render(t_cub *cub)
 {
 	draw_background(cub);
+	cub->distances = cast_ray(cub);
+	cub->heights = get_heights(cub);
 	render_walls(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->win_ptr, \
 		cub->bg->img_ptr, 0, 0);
