@@ -6,7 +6,7 @@
 /*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:18:45 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/09 13:51:43 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/09 21:02:25 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,14 @@ int	render(t_cub *cub)
 	return (0);
 }
 
+// int	get_texture_pix(t_cub *cub, int x, int y)
+// {
+// 	int	color;
+
+// 	color = *(int *)(cub->imgs->addr + i * cub->imgs->line_len + \
+// 				j * (cub->imgs->bpp / 8));
+// }
+
 void render_walls(t_cub *cub)
 {
     int x;
@@ -62,21 +70,28 @@ void render_walls(t_cub *cub)
     double wall_height;
     int wall_top;
     int wall_bottom;
+	// int	i;
 
     // Loop through each column of the screen
-    for (x = 0; x < WIDTH; x++)
+    // i = 0;
+	for (x = 0; x < WIDTH; x++)
     {
         // Calculate the height of the wall
         wall_height = (double)HEIGHT / cub->heights[x];
         wall_top = (HEIGHT - wall_height) / 2;
         wall_bottom = wall_top + wall_height;
-
+		
         // Draw the wall
         for (y = 0; y < HEIGHT; y++)
         {
+			// i = 0;
             if (y >= wall_top && y < wall_bottom) // Wall
 			{
-                color = GREEN;
+                /*      CHANGE COLOR BY CORRESPONDING PIXEL IN TEXTURE  */
+				color = *(int *)(cub->imgs->addr + (int)cub->hits[x] * cub->imgs->line_len + \
+					y * (cub->imgs->bpp / 8));
+				// i++;
+				wall_height--;
             	my_mlx_pixel_put(cub->bg, x, y, color);
 			}
 		}

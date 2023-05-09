@@ -6,7 +6,7 @@
 /*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/09 18:26:47 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/09 21:04:50 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ t_cub	*init_cub(char *arg)
 	cub->imgs = NULL;
 	cub->player = player_data(cub->map);
 	cub->plane_dist = ((double)WIDTH / 2) / tan((double)FOV / 2);
+	cub->distances = collect(sizeof(double) * WIDTH);
+	cub->heights = collect(sizeof(double) * WIDTH);
+	cub->hits = collect(sizeof(double) * WIDTH);
 	return (cub);
 }
 
@@ -119,6 +122,8 @@ void	init_mlx(t_cub *cub)
 	cub->bg->img_ptr = mlx_new_image(cub->mlx_ptr, WIDTH, HEIGHT);
 	cub->bg->addr= mlx_get_data_addr(cub->bg->img_ptr, &cub->bg->bpp, \
 						&cub->bg->line_len, &cub->bg->endian);
+	cub->imgs = collect(sizeof(t_mlx));
+	download_image(cub, "assets/TECH_0G.xpm");
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_keypress, cub);
 	mlx_loop_hook(cub->mlx_ptr, &render, cub);
 	mlx_loop(cub->mlx_ptr);

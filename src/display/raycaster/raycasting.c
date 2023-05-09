@@ -49,45 +49,47 @@ double	distance(t_ray *ray)
 	return (distance);
 }
 
+double	hit_point(t_ray *ray, double distance)
+{
+	double	wallX;
+	
+	if (ray->side == 0) 
+		wallX = ray->pos.y + distance * ray->dir.y;
+	else
+		wallX = ray->pos.x + distance * ray->dir.x;
+    wallX -= floor((wallX));
+	return (wallX);
+}
+
 double	*cast_ray(t_cub *cub)
 {
 	int	i;
 	double	cameraX;
-	double	*distances;
 	t_ray	*ray;
 
 	i = 0;
-	distances = malloc(sizeof(double) * WIDTH);
-	if (!distances)
-		return (NULL);
 	while (i < WIDTH)
 	{
 		cameraX = 2 * i / (double)WIDTH - 1;
 		ray = init_ray(cub, cameraX);
 		algo_dda(cub, ray);
-		distances[i] = distance(ray);
+		cub->distances[i] = distance(ray);
+		cub->hits[i] = hit_point(ray, cub->distances[i]);
 		free(ray);
 		i++;
 	}
-	return (distances);
+	return (cub->distances);
 }
 
 double	*get_heights(t_cub *cub)
 {
-	double	*heights;
 	int		i;
-	// int		j;
 
 	i = 0;
-	// j = WIDTH - 1;
-	heights = malloc(sizeof(double) * WIDTH);
-	if (!heights)
-		return (NULL);
 	while (i < WIDTH)
 	{
-		heights[i] = ((double)WALL_H * cub->distances[i]) / 720;
+		cub->heights[i] = ((double)WALL_H * cub->distances[i]) / (double)HEIGHT;
 		i++;
-		// j--;
 	}
-	return (heights);
+	return (cub->heights);
 }

@@ -19,7 +19,7 @@ char	**get_file(int fd, int count)
 	char	**file;
 
 	i = 0;
-	file = malloc(sizeof(char *) * (count + 1));
+	file = collect(sizeof(char *) * (count + 1));
 	if (!file)
 		return (close(fd), NULL);
 	while (i < count)
