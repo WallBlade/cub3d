@@ -104,6 +104,8 @@ int	get_colors(char **file, int type)
 			tab = convert_colors(clean_data(file[i]));
 		i++;
 	}
+	if (tab == -1)
+		print_error("ERROR\nCorrupted color", NULL);
 	return (tab);
 }
 

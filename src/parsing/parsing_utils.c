@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:53:59 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/09 18:39:01 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:53:38 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	convert_colors(char *color)
 	char	**tmp;
 
 	tmp = ft_split(color, ',');
-	if (!tmp || !tmp[0] || !tmp[1] || !tmp[2])
+	if (!tmp[0] || !tmp[1] || !tmp[2])
 		return (-1);
 	tab[0] = ft_atoi(tmp[0]);
 	tab[1] = ft_atoi(tmp[1]);
