@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 17:23:55 by smessal           #+#    #+#             */
-/*   Updated: 2023/04/17 15:41:55 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:41:20 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	col_closed(char **map, int j)
 	return (1);
 }
 
-int	map_closed(char **map)
+void	map_closed(char **map)
 {
 	int	i;
 	int	j;
@@ -99,7 +99,7 @@ int	map_closed(char **map)
 	while (map && map[i])
 	{
 		if (!row_closed(map, i))
-			return (0);
+			print_error("ERROR\nMap not closed 1", map[i]);
 		i++;
 	}
 	i = 0;
@@ -107,8 +107,7 @@ int	map_closed(char **map)
 	while (j < longest_row(map))
 	{
 		if (!col_closed(map, j))
-			return (0);
+			print_error("ERROR\nMap not closed", NULL);
 		j++;
 	}
-	return (1);
 }

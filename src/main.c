@@ -20,10 +20,10 @@ int	main(int argc, char **argv)
 		return (-1);
 	check_filename(argv[1]);
 	cub = init_cub(argv[1]);
-	if (!map_closed(cub->map) || !map_elem(cub->map))
-		printf("Not closed\n");
-	// cub->distances = cast_ray(cub);
-	// cub->heights = get_heights(cub);
+	map_closed(cub->map);
+	map_elem(cub->map);
+	cub->distances = cast_ray(cub);
+	cub->heights = get_heights(cub);
 	init_mlx(cub);
 	free_gc();
 	return (0);

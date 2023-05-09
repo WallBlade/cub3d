@@ -133,16 +133,13 @@ t_pos		determine_dir(char c);
 t_pos		determine_plane(t_pos dir);
 int			is_player(char c);
 
-
-
 /*-----------------------Parsing-utils----------------------*/
 
 int			is_data(char *line);
 int			check_filename(char *name);
-void		print_error(char *str, char *arg);
 char		*clean_data(char *path);
 int			convert_colors(char *color);
-
+void		check_assets(char **assets);
 
 /*--------------------------Parsing-------------------------*/
 
@@ -169,17 +166,21 @@ void		update_player(t_cub *cub, double incr_x, double incr_y, int option);
 void		move_player(int keysym, t_cub *cub);
 void		rotate_player(int keysym, t_cub *cub);
 
-
 /*--------------------------Utils---------------------------*/
 
 int			ft_tablen(char **tab);
 int			longest_row(char **tab);
+void		print_error(char *str, char *arg);
 
 /*--------------------------Errors--------------------------*/
 /*--err_map_closed--*/
 
-int			map_closed(char **map);
-int			map_elem(char **map);
+int			row_closed(char **map, int i);
+void		map_closed(char **map);
+
+/*--err_map_elem--*/
+
+void		map_elem(char **map);
 
 /*---------------------------Draw---------------------------*/
 

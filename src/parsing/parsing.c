@@ -36,6 +36,8 @@ char	**get_file(int fd, int count)
 		}
 	}
 	file[i] = NULL;
+	if (file[0] == NULL)
+		print_error("ERROR\nEmpty file", NULL);
 	return (close(fd), file);
 }
 
@@ -53,7 +55,10 @@ char	**get_map(char **file)
 	if (!map)
 		return (NULL);
 	while (++i < len)
+	{
+		
 		map[j++] = ft_strdup(file[i]);
+	}
 	map[j] = NULL;
 	return (map);
 }
@@ -80,8 +85,7 @@ char	**get_assets(char **file)
 		i++;
 	}
 	assets[4] = NULL;
-	if (!assets[0] || !assets[1] || !assets[2] || !assets[3])
-		print_error("Error\nFailed loading textures", NULL);
+	check_assets(assets);
 	return (assets);
 }
 
@@ -100,8 +104,6 @@ int	get_colors(char **file, int type)
 			tab = convert_colors(clean_data(file[i]));
 		i++;
 	}
-	if (tab < 0)
-		print_error("Error\nFailed loading colors", NULL);
 	return (tab);
 }
 

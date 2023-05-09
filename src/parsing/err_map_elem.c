@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:54:19 by smessal           #+#    #+#             */
-/*   Updated: 2023/04/17 15:43:35 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:39:54 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	rep_pos(char **map)
 	return (0);
 }
 
-int	map_elem(char **map)
+void	map_elem(char **map)
 {
 	int		i;
 	int		j;
@@ -89,12 +89,12 @@ int	map_elem(char **map)
 		while (map[i][j])
 		{
 			if (!is_valid(map[i][j], elems))
-				return (0);
+				print_error("ERROR\nWrong element in map", NULL);
 			j++;
 		}
 		i++;
 	}
 	if (!rep_pos(map))
-		return (0);
-	return (1);
+		print_error("ERROR\nMultiple starting points", NULL);
 }
+

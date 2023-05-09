@@ -6,39 +6,39 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 21:21:16 by smessal           #+#    #+#             */
-/*   Updated: 2023/02/26 17:58:55 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:41:48 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_cwords(char const *s, char c)
+int	ft_cwords(char const *s, char c)
 {
-	size_t	i;
-	size_t	count;
+	int		i;
+	int		count;
 
 	i = 0;
 	count = 0;
 	while (s && s[i])
 	{
-		if (s[i] != c)
+		if (s[i] != c && s[i] != ' ' && s[i] != '\t')
 		{
 			count++;
-			while (s[i] && (s[i] != c))
+			while (s[i] && (s[i] != c && s[i] != ' ' && s[i] != '\t'))
 				i++;
 		}
-		while (s[i] && s[i] == c)
+		while (s[i] && (s[i] == c || s[i] == ' ' || s[i] == '\t'))
 			i++;
 	}
 	return (count);
 }
 
-static size_t	ft_wdlen(char const *s, char c, int i)
+int	ft_wdlen(char const *s, char c, int i)
 {
-	size_t	len;
+	int	len;
 
 	len = 0;
-	while (s && s[i] && (s[i] != c))
+	while (s && s[i] && (s[i] != c  && s[i] != ' ' && s[i] != '\t'))
 	{
 		i++;
 		len++;
@@ -49,11 +49,11 @@ static size_t	ft_wdlen(char const *s, char c, int i)
 char	**ft_split(char *s, char c)
 {
 	char	**big;
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	int		i;
+	int		j;
+	int		k;
 
-	big = (char **)collect(sizeof(char *) * (ft_cwords(s, c) + 1));
+	big = collect(sizeof(char *) * (ft_cwords(s, c) + 1));
 	if (!big)
 		return (NULL);
 	i = 0;
@@ -61,12 +61,12 @@ char	**ft_split(char *s, char c)
 	while (j < ft_cwords(s, c))
 	{
 		k = 0;
-		while (s[i] && s[i] == c)
+		while (s[i] && (s[i] == c || s[i] == ' ' || s[i] == '\t'))
 			i++;
 		big[j] = collect(sizeof(char) * (ft_wdlen(s, c, i) + 1));
 		if (!big[j])
 			return (NULL);
-		while (s[i] && (s[i] != c))
+		while (s[i] && (s[i] != c && s[i] != ' ' && s[i] != '\t'))
 			big[j][k++] = s[i++];
 		big[j++][k] = '\0';
 	}
