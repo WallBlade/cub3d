@@ -1,10 +1,10 @@
-NO ./path_to_the_north_texture
+NO ../../assets/TECH_0G.xpm
 
-SO ./path_to_the_south_texture
+SO ../../assets/TECH_0G.xpm
 
-WE ./path_to_the_west_texture
+WE ../../assets/TECH_0G.xpm
 
-EA ./path_to_the_east_texture
+EA ../../assets/TECH_0G.xpm
 
 F 165,42,42
 
