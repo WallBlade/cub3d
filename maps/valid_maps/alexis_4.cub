@@ -1,10 +1,10 @@
-NO ./path_to_the_north_texture
+NO ../assets/STEEL_1A.xpm
 
-SO ./path_to_the_south_texture
+SO ../assets/STEEL_1A.xpm
 
-WE ./path_to_the_west_texture
+WE ../assets/STEEL_1A.xpm
 
-EA ./path_to_the_east_texture
+EA ../assets/STEEL_1A.xpm
 
 F 165,42,42
 

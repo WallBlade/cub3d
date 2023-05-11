@@ -6,7 +6,7 @@
 /*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:18:45 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/09 21:02:25 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/11 15:53:52 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,67 +54,43 @@ int	render(t_cub *cub)
 	return (0);
 }
 
-// int	get_texture_pix(t_cub *cub, int x, int y)
-// {
-// 	int	color;
-
-// 	color = *(int *)(cub->imgs->addr + i * cub->imgs->line_len + \
-// 				j * (cub->imgs->bpp / 8));
-// }
-
 void render_walls(t_cub *cub)
 {
     int x;
     int y;
     int color;
     double wall_height;
-    int wall_top;
-    int wall_bottom;
-	// int	i;
+    double wall_top;
+    double wall_bottom;
+	double	i;
+	double	ratio;
 
     // Loop through each column of the screen
-    // i = 0;
+    i = 0;
 	for (x = 0; x < WIDTH; x++)
     {
         // Calculate the height of the wall
         wall_height = (double)HEIGHT / cub->heights[x];
         wall_top = (HEIGHT - wall_height) / 2;
         wall_bottom = wall_top + wall_height;
-		
+		ratio = wall_height / (double)TEXT_H;
         // Draw the wall
+		i = 0;
+		while (wall_top < 0)
+		{
+			i++;
+			wall_top++;
+		}
         for (y = 0; y < HEIGHT; y++)
         {
-			// i = 0;
-            if (y >= wall_top && y < wall_bottom) // Wall
+            if (y >= (int)wall_top && y < (int)wall_bottom) // Wall
 			{
                 /*      CHANGE COLOR BY CORRESPONDING PIXEL IN TEXTURE  */
-				color = *(int *)(cub->imgs->addr + (int)cub->hits[x] * cub->imgs->line_len + \
-					y * (cub->imgs->bpp / 8));
-				// i++;
-				wall_height--;
+				color = *(int *)(cub->imgs->addr + (int)round(((i / ratio))) *  cub->imgs->line_len + \
+					(int)round((cub->hits[x] * (double)TEXT_W)) * (cub->imgs->bpp / 8));
+				i++;
             	my_mlx_pixel_put(cub->bg, x, y, color);
 			}
 		}
     }
 }
-
-// int get_wall_texture_color(t_cub *cub, int x, int y, double wall_height, double distance)
-// {
-//     int texture_x;
-//     int texture_y;
-//     double texture_distance;
-//     int color;
-
-//     // Calculate the distance from the top of the wall to the current pixel
-//     texture_distance = (y - (cub->screen_height - wall_height) / 2.0) / wall_height;
-
-//     // Calculate the coordinates of the corresponding point on the wall texture
-//     texture_x = (int)(texture_distance * TEXTURE_WIDTH);
-//     texture_y = (int)(distance * TEXTURE_HEIGHT) % TEXTURE_HEIGHT;
-
-//     // Get the color of the corresponding pixel in the wall texture
-//     color = cub->textures[TEXTURE_INDEX_WALL][texture_y][texture_x];
-
-//     return color;
-// }
-

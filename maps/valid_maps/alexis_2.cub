@@ -6,8 +6,9 @@ WE ../assets/STEEL_1A.xpm
 
 EA ../assets/STEEL_1A.xpm
 
-C 255,20 ,30
-F 000, 000, 00
+F 165,42,42
+
+C 0,0,255
 
 
 
