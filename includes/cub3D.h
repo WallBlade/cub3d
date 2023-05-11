@@ -26,6 +26,8 @@
 # define WE 2
 # define EA 3
 # define PI 3.14159265358979323846
+# define TEXT_W 64
+# define TEXT_H 64
 
 # include <unistd.h>
 # include <stdio.h>
@@ -152,12 +154,12 @@ void		get_data(int fd, int count, t_cub *cub);
 
 /*-----------------------Raycasting-------------------------*/
 
-double	*cast_ray(t_cub *cub);
-t_ray	*init_ray(t_cub *cub, double cameraX);
-double	*get_heights(t_cub *cub);
-double	hit_point(t_ray *ray, double distance);
+double		*cast_ray(t_cub *cub);
+t_ray		*init_ray(t_cub *cub, double cameraX);
+double		*get_heights(t_cub *cub);
+double		hit_point(t_ray *ray, double distance);
 /*--textures--*/
-int		download_image(t_cub *cub, char *path);
+int			download_image(t_cub *cub, t_mlx asset, char *path)
 
 /*--------------------------Events--------------------------*/
 
@@ -192,5 +194,5 @@ void 		render_walls(t_cub *cub);
 
 /*---------------------------Free---------------------------*/
 
-void	free_tab(int **tab);
+void		free_tab(int **tab);
 #endif

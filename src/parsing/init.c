@@ -3,87 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/09 21:04:50 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/11 15:15:51 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-int	is_player(char c)
-{
-	return (c == 'N' || c == 'S' || c == 'E' || c == 'W');
-}
-
-t_pos	determine_dir(char c)
-{
-	t_pos	dir;
-	
-	if (c == 'E')
-	{
-		dir.x = 1;
-		dir.y = 0;
-	}
-	else if (c == 'N')
-	{
-		dir.x = 0;
-		dir.y = -1;
-	}
-	else if (c == 'W')
-	{
-		dir.x = -1;
-		dir.y = 0;
-	}
-	else
-	{
-		dir.x = 0;
-		dir.y = 1;
-	}
-	return (dir);
-}
-
-t_pos	determine_plane(t_pos dir)
-{
-	t_pos	plane;
-
-	plane.x = dir.y * -1;
-	plane.y = dir.x;
-	return (plane);
-}
-
-t_player	*player_data(char **map)
-{
-	int			x;
-	int			y;
-	t_player	*player;
-
-	y = 0;
-	player = collect(sizeof(t_player));
-	if (!player)
-		return (NULL);
-	while (map && map[y])
-	{
-		x = 0;
-		while (map[y][x])
-		{
-			if (is_player(map[y][x]))
-			{	
-				player->x = x + 0.5;
-				player->y = y + 0.5;
-				player->mapX = x;
-				player->mapY = y;
-				player->dir = determine_dir(map[y][x]);
-				player->plane = determine_plane(player->dir);
-				break ;
-			}
-			x++;
-		}
-		y++;
-	}
-	return (player);
-}
 
 t_cub	*init_cub(char *arg)
 {
@@ -111,6 +38,28 @@ t_cub	*init_cub(char *arg)
 	return (cub);
 }
 
+void	init_assets(t_cub *cub)
+{
+	int		check;
+	t_mlx	*assets;
+
+	check = 0;
+	assets = collect(sizeof(t_mlx) * 4);
+	if (!assets)
+		return ;
+	if (download_image(cub, assets[NO], cub->assets[NO]))
+		check += 1;
+	if (download_image(cub, assets[SO], cub->assets[SO]))
+		check += 1;
+	if (download_image(cub, assets[WE], cub->assets[WE]))
+		check += 1;
+	if (download_image(cub, assets[EA], cub->assets[EA]))
+		check += 1;
+	if (check != 4)
+		print_error("ERROR\nFailed loading textures", NULL);
+	cub->imgs = assets;
+}
+
 void	init_mlx(t_cub *cub)
 {
 	cub->mlx_ptr = mlx_init();
@@ -122,8 +71,7 @@ void	init_mlx(t_cub *cub)
 	cub->bg->img_ptr = mlx_new_image(cub->mlx_ptr, WIDTH, HEIGHT);
 	cub->bg->addr= mlx_get_data_addr(cub->bg->img_ptr, &cub->bg->bpp, \
 						&cub->bg->line_len, &cub->bg->endian);
-	cub->imgs = collect(sizeof(t_mlx));
-	download_image(cub, "assets/TECH_0G.xpm");
+	init_assets(cub);
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_keypress, cub);
 	mlx_loop_hook(cub->mlx_ptr, &render, cub);
 	mlx_loop(cub->mlx_ptr);
