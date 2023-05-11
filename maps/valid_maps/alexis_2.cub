@@ -1,21 +1,14 @@
-NO ../assets/STEEL_1A.xpm
+NO assets/CRATE_1B.xpm
 
-SO ../assets/STEEL_1A.xpm
+SO assets/STEEL_1A.xpm
 
-WE ../assets/STEEL_1A.xpm
+WE assets/LIGHT_1B.xpm
 
-EA ../assets/STEEL_1A.xpm
+EA assets/SUPPORT_1B.xpm
 
 F 165,42,42
 
 C 0,0,255
-
-
-
-
-
-
-
 
 
 111111111111111111111111111111

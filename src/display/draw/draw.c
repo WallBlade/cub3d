@@ -6,7 +6,7 @@
 /*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:18:45 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/11 15:53:52 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/11 17:56:04 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void render_walls(t_cub *cub)
             if (y >= (int)wall_top && y < (int)wall_bottom) // Wall
 			{
                 /*      CHANGE COLOR BY CORRESPONDING PIXEL IN TEXTURE  */
-				color = *(int *)(cub->imgs->addr + (int)round(((i / ratio))) *  cub->imgs->line_len + \
-					(int)round((cub->hits[x] * (double)TEXT_W)) * (cub->imgs->bpp / 8));
+				color = *(int *)(cub->imgs[cub->tex[x]].addr + (int)round(((i / ratio))) *  cub->imgs[cub->tex[x]].line_len + \
+					(int)round((cub->hits[x] * (double)TEXT_W)) * (cub->imgs[cub->tex[x]].bpp / 8));
 				i++;
             	my_mlx_pixel_put(cub->bg, x, y, color);
 			}

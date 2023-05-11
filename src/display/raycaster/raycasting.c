@@ -61,6 +61,20 @@ double	hit_point(t_ray *ray, double distance)
 	return (wallX);
 }
 
+int	get_orient(t_ray *ray)
+{
+	if (ray->dir.y > 0 && ray->side == 1)
+		return (SO);
+	else if (ray->dir.y < 0 && ray->side == 1)
+		return (NO);
+	else if (ray->dir.x > 0 && ray->side == 0)
+		return (EA);
+	else if (ray->dir.x < 0 && ray->side == 0)
+		return (WE);
+	else
+		return (0);
+}
+
 double	*cast_ray(t_cub *cub)
 {
 	int	i;
@@ -75,6 +89,7 @@ double	*cast_ray(t_cub *cub)
 		algo_dda(cub, ray);
 		cub->distances[i] = distance(ray);
 		cub->hits[i] = hit_point(ray, cub->distances[i]);
+		cub->tex[i] = get_orient(ray);
 		free(ray);
 		i++;
 	}

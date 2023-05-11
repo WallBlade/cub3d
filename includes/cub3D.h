@@ -97,6 +97,7 @@ typedef struct s_cub
 	double		plane_dist;
 	double		*distances;
 	double		*heights;
+	int			*tex;
 	double		*hits;
 	t_ray		*ray;
 	t_mlx		*bg;
@@ -159,7 +160,7 @@ t_ray		*init_ray(t_cub *cub, double cameraX);
 double		*get_heights(t_cub *cub);
 double		hit_point(t_ray *ray, double distance);
 /*--textures--*/
-int			download_image(t_cub *cub, t_mlx asset, char *path)
+int			download_image(t_cub *cub, t_mlx *asset, char *path);
 
 /*--------------------------Events--------------------------*/
 

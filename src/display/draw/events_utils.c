@@ -6,7 +6,7 @@
 /*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:17:31 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/09 18:22:54 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/11 18:02:28 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,13 @@ void	update_player_side(t_cub *cub, double incr_x, double incr_y)
 void	move_player(int keysym, t_cub *cub)
 {
 	if (keysym == 'w')
-		update_player_fw(cub, 0.2, 0.2);
+		update_player_fw(cub, 0.1, 0.1);
 	else if (keysym == 's')
-		update_player_fw(cub, -0.2, -0.2);
+		update_player_fw(cub, -0.1, -0.1);
 	else if (keysym == 'a')
-		update_player_side(cub, -0.2, -0.2);
+		update_player_side(cub, -0.1, -0.1);
 	else if (keysym == 'd')
-		update_player_side(cub, 0.2, 0.2);
+		update_player_side(cub, 0.1, 0.1);
 }
 
 void	update_player_rotate(t_cub *cub, int angle)
@@ -97,10 +97,10 @@ void	rotate_player(int keysym, t_cub *cub)
 {	
 	if (keysym == 65363)
 	{
-		update_player_rotate(cub, 10);
+		update_player_rotate(cub, 5);
 	}
 	else if (keysym == 65361)
 	{
-		update_player_rotate(cub, -10);
+		update_player_rotate(cub, -5);
 	}
 }

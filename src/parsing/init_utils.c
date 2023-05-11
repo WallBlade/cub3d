@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/11 14:58:22 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:05:15 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "cub3D.h"
 
 int	is_player(char c)
 {

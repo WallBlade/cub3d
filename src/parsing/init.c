@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
+/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/11 15:15:51 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:26:16 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ t_cub	*init_cub(char *arg)
 	cub->distances = collect(sizeof(double) * WIDTH);
 	cub->heights = collect(sizeof(double) * WIDTH);
 	cub->hits = collect(sizeof(double) * WIDTH);
+	cub->tex = collect(sizeof(double) * WIDTH);
 	return (cub);
 }
 
@@ -47,13 +48,13 @@ void	init_assets(t_cub *cub)
 	assets = collect(sizeof(t_mlx) * 4);
 	if (!assets)
 		return ;
-	if (download_image(cub, assets[NO], cub->assets[NO]))
+	if (download_image(cub, &assets[NO], cub->assets[NO]))
 		check += 1;
-	if (download_image(cub, assets[SO], cub->assets[SO]))
+	if (download_image(cub, &assets[SO], cub->assets[SO]))
 		check += 1;
-	if (download_image(cub, assets[WE], cub->assets[WE]))
+	if (download_image(cub, &assets[WE], cub->assets[WE]))
 		check += 1;
-	if (download_image(cub, assets[EA], cub->assets[EA]))
+	if (download_image(cub, &assets[EA], cub->assets[EA]))
 		check += 1;
 	if (check != 4)
 		print_error("ERROR\nFailed loading textures", NULL);
