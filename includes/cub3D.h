@@ -174,6 +174,7 @@ int			download_image(t_cub *cub, t_mlx *asset, char *path);
 /*--------------------------Events--------------------------*/
 
 int			handle_keypress(int keysym, t_cub *cub);
+int			mouse_click(t_cub *cub);
 
 /*---utils----*/
 int			is_move(int keysym);
@@ -210,4 +211,6 @@ int			get_color(t_cub *cub, t_draw *wall, int x);
 /*---------------------------Free---------------------------*/
 
 void		free_tab(int **tab);
+void		free_display(t_cub *cub);
+
 #endif
