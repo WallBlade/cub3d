@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:17:31 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/23 11:02:15 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/23 11:04:10 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int	check_move(t_cub *cub, double incr_x, double incr_y)
 {
 	double	check_x;
 	double	check_y;
-	double	posX;
-	double	posY;
+	double	pos_x;
+	double	pos_y;
 
 	check_x = 0;
 	check_y = 0;
@@ -39,10 +39,10 @@ int	check_move(t_cub *cub, double incr_x, double incr_y)
 	{
 		check_x += incr_x / 10;
 		check_y += incr_y / 10;
-		posX = cub->player->x + check_x * cub->player->dir.x;
-		posY = cub->player->y + check_y * cub->player->dir.y;
-		if (cub->map[(int)floor(posY)][(int)floor(posX)] &&
-			cub->map[(int)floor(posY)][(int)floor(posX)] == '1')
+		pos_x = cub->player->x + check_x * cub->player->dir.x;
+		pos_y = cub->player->y + check_y * cub->player->dir.y;
+		if (cub->map[(int)floor(pos_y)][(int)floor(pos_x)] &&
+			cub->map[(int)floor(pos_y)][(int)floor(pos_x)] == '1')
 			return (0);
 	}
 	return (1);
@@ -50,15 +50,15 @@ int	check_move(t_cub *cub, double incr_x, double incr_y)
 
 void	update_player_fw(t_cub *cub, double incr_x, double incr_y)
 {
-	double	posX;
-	double	posY;
+	double	pos_x;
+	double	pos_y;
 
-	posX = cub->player->x + incr_x * cub->player->dir.x;
-	posY = cub->player->y + incr_y * cub->player->dir.y;
-	if (cub->map[(int)floor(posY)][(int)floor(posX)] &&
-		cub->map[(int)floor(posY)][(int)floor(posX)] == '1')
+	pos_x = cub->player->x + incr_x * cub->player->dir.x;
+	pos_y = cub->player->y + incr_y * cub->player->dir.y;
+	if (cub->map[(int)floor(pos_y)][(int)floor(pos_x)] &&
+		cub->map[(int)floor(pos_y)][(int)floor(pos_x)] == '1')
 		return ;
-	else if (!cub->map[(int)floor(posY)][(int)floor(posX)] || !check_move(cub, incr_x, incr_y))
+	else if (!cub->map[(int)floor(pos_y)][(int)floor(pos_x)] || !check_move(cub, incr_x, incr_y))
 		return ;
 	else
 	{
@@ -71,12 +71,12 @@ void	update_player_fw(t_cub *cub, double incr_x, double incr_y)
 
 void	update_player_side(t_cub *cub, double incr_x, double incr_y)
 {
-	double	posX;
-	double	posY;
+	double	pos_x;
+	double	pos_y;
 
-	posX = cub->player->x + incr_x * cub->player->plane.x;
-	posY = cub->player->y + incr_y * cub->player->plane.y;
-	if (cub->map[(int)floor(posY)][(int)floor(posX)] == '1')
+	pos_x = cub->player->x + incr_x * cub->player->plane.x;
+	pos_y = cub->player->y + incr_y * cub->player->plane.y;
+	if (cub->map[(int)floor(pos_y)][(int)floor(pos_x)] == '1')
 		return ;
 	else
 	{
