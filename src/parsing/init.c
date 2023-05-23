@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/23 10:06:23 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:54:52 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	init_mlx(t_cub *cub)
 						&cub->bg->line_len, &cub->bg->endian);
 	init_assets(cub);
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_keypress, cub);
+	mlx_hook(cub->win_ptr, 17, 1L << 5, &mouse_click, cub);
 	mlx_loop_hook(cub->mlx_ptr, &render, cub);
 	mlx_loop(cub->mlx_ptr);
 	if (cub->bg->img_ptr)
