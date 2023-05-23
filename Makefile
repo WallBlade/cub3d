@@ -9,7 +9,7 @@ OBJ		=	$(SRCS:.c=.o)
 
 CC		=	@cc
 RM		=	@rm -rf
-CFLAGS	=	-Wall -Wextra -g3 -I./includes
+CFLAGS	=	-Wall -Wextra -Werror -g3 -I./includes
 
 NAME	=	cub3D
 

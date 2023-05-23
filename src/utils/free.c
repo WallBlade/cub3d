@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 18:59:07 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/23 14:26:15 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:20:30 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	free_display(t_cub *cub)
 {
 	if (cub->imgs)
 	{
-		if (cub->imgs[0].img_ptr)
+		if (cub->imgs[0].height == 0 && cub->imgs[0].img_ptr)
 			mlx_destroy_image(cub->mlx_ptr, cub->imgs[0].img_ptr);
-		if (cub->imgs[1].img_ptr)
+		if (cub->imgs[1].height == 0 && cub->imgs[1].img_ptr)
 			mlx_destroy_image(cub->mlx_ptr, cub->imgs[1].img_ptr);
-		if (cub->imgs[2].img_ptr)
+		if (cub->imgs[2].height == 0 && cub->imgs[2].img_ptr)
 			mlx_destroy_image(cub->mlx_ptr, cub->imgs[2].img_ptr);
-		if (cub->imgs[3].img_ptr)
+		if (cub->imgs[3].height == 0 && cub->imgs[3].img_ptr)
 			mlx_destroy_image(cub->mlx_ptr, cub->imgs[3].img_ptr);
 	}
 	if (cub->bg && cub->bg->img_ptr)

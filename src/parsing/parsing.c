@@ -86,8 +86,7 @@ char	**get_assets(char **file)
 		i++;
 	}
 	assets[4] = NULL;
-	check_assets(assets);
-	return (assets);
+	return (check_assets(assets), assets);
 }
 
 int	get_colors(char **file, int type)

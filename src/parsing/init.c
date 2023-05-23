@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/23 14:28:02 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/23 15:20:21 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,19 @@ void	init_assets(t_cub *cub)
 	assets = collect(sizeof(t_mlx) * 4);
 	if (!assets)
 		return ;
-	if (!download_image(cub, &assets[NO], cub->assets[NO]))
-		print_error("ERROR\nFailed loading textures", NULL, cub);
-	if (!download_image(cub, &assets[SO], cub->assets[SO]))
-		print_error("ERROR\nFailed loading textures", NULL, cub);
-	if (!download_image(cub, &assets[WE], cub->assets[WE]))
-		print_error("ERROR\nFailed loading textures", NULL, cub);
-	if (!download_image(cub, &assets[EA], cub->assets[EA]))
-		print_error("ERROR\nFailed loading textures", NULL, cub);
+	assets[0].height = -1;
+	assets[1].height = -1;
+	assets[2].height = -1;
+	assets[3].height = -1;
 	cub->imgs = assets;
+	if (!download_image(cub, &cub->imgs[NO], cub->assets[NO]))
+		print_error("ERROR\nFailed loading textures", NULL, cub);
+	if (!download_image(cub, &cub->imgs[SO], cub->assets[SO]))
+		print_error("ERROR\nFailed loading textures", NULL, cub);
+	if (!download_image(cub, &cub->imgs[WE], cub->assets[WE]))
+		print_error("ERROR\nFailed loading textures", NULL, cub);
+	if (!download_image(cub, &cub->imgs[EA], cub->assets[EA]))
+		print_error("ERROR\nFailed loading textures", NULL, cub);
 }
 
 void	init_mlx(t_cub *cub)
@@ -66,7 +70,7 @@ void	init_mlx(t_cub *cub)
 		return ;
 	cub->win_ptr = mlx_new_window(cub->mlx_ptr, WIDTH, HEIGHT, "CUB");
 	if (!cub->win_ptr)
-		return (free(cub->win_ptr));
+		return ;
 	cub->bg->img_ptr = mlx_new_image(cub->mlx_ptr, WIDTH, HEIGHT);
 	cub->bg->addr = mlx_get_data_addr(cub->bg->img_ptr, &cub->bg->bpp, \
 						&cub->bg->line_len, &cub->bg->endian);
