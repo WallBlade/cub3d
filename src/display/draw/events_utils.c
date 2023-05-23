@@ -6,7 +6,7 @@
 /*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 13:17:31 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/11 18:02:28 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/23 11:02:15 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,28 @@ int	is_move(int keysym)
 		return (0);
 }
 
+int	check_move(t_cub *cub, double incr_x, double incr_y)
+{
+	double	check_x;
+	double	check_y;
+	double	posX;
+	double	posY;
+
+	check_x = 0;
+	check_y = 0;
+	while (check_x < incr_x)
+	{
+		check_x += incr_x / 10;
+		check_y += incr_y / 10;
+		posX = cub->player->x + check_x * cub->player->dir.x;
+		posY = cub->player->y + check_y * cub->player->dir.y;
+		if (cub->map[(int)floor(posY)][(int)floor(posX)] &&
+			cub->map[(int)floor(posY)][(int)floor(posX)] == '1')
+			return (0);
+	}
+	return (1);
+}
+
 void	update_player_fw(t_cub *cub, double incr_x, double incr_y)
 {
 	double	posX;
@@ -33,7 +55,10 @@ void	update_player_fw(t_cub *cub, double incr_x, double incr_y)
 
 	posX = cub->player->x + incr_x * cub->player->dir.x;
 	posY = cub->player->y + incr_y * cub->player->dir.y;
-	if (cub->map[(int)floor(posY)][(int)floor(posX)] == '1')
+	if (cub->map[(int)floor(posY)][(int)floor(posX)] &&
+		cub->map[(int)floor(posY)][(int)floor(posX)] == '1')
+		return ;
+	else if (!cub->map[(int)floor(posY)][(int)floor(posX)] || !check_move(cub, incr_x, incr_y))
 		return ;
 	else
 	{
