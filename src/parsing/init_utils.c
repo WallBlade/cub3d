@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/23 10:11:11 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/23 11:11:37 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ void	load_data(t_player *player, char **map, int x, int y)
 {
 	player->x = x + 0.5;
 	player->y = y + 0.5;
-	player->mapX = x;
-	player->mapY = y;
+	player->map_x = x;
+	player->map_y = y;
 	player->dir = determine_dir(map[y][x]);
 	player->plane = determine_plane(player->dir);
 }
