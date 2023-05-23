@@ -42,6 +42,15 @@
 # include "../mlx_linux/mlx.h"
 # include "../libft/libft.h"
 
+typedef struct s_draw
+{
+	double	height;
+    double	top;
+    double	bottom;
+	double	i;
+	double	ratio;
+}			t_draw;
+
 typedef struct s_pos
 {
 	double	x;

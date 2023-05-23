@@ -6,7 +6,7 @@
 /*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:18:45 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/11 17:56:04 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/23 11:19:39 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	draw_background(t_cub *cub)
 	int		y;
 
 	y = 0;
-	while (y < 720)
+	while (y < HEIGHT)
 	{
 		x = 0;
-		while (x < 1080)
+		while (x < WIDTH)
 		{
-			if (y < 720 / 2)
+			if (y < HEIGHT / 2)
 				my_mlx_pixel_put(cub->bg, x, y, cub->ceiling);
 			else
 				my_mlx_pixel_put(cub->bg, x, y, cub->floor);
@@ -54,43 +54,43 @@ int	render(t_cub *cub)
 	return (0);
 }
 
+void	init_wall(t_cub *cub, t_draw wall, int x)
+{
+	wall.height = (double)HEIGHT / cub->heights[x];
+	wall.top = (HEIGHT - wall.height) / 2;
+	wall.bottom =  wall.top + wall.height;
+	wall.ratio = wall.height / (double)TEXT_H;
+	wall.i = 0;
+	while (wall.top < 0)
+	{
+		wall.i++;
+		wall.top++;
+	}
+}
+
 void render_walls(t_cub *cub)
 {
     int x;
     int y;
     int color;
-    double wall_height;
-    double wall_top;
-    double wall_bottom;
-	double	i;
-	double	ratio;
+	t_draw	wall;
 
-    // Loop through each column of the screen
-    i = 0;
-	for (x = 0; x < WIDTH; x++)
+	x = 0;
+	while (x < WIDTH)
     {
-        // Calculate the height of the wall
-        wall_height = (double)HEIGHT / cub->heights[x];
-        wall_top = (HEIGHT - wall_height) / 2;
-        wall_bottom = wall_top + wall_height;
-		ratio = wall_height / (double)TEXT_H;
-        // Draw the wall
-		i = 0;
-		while (wall_top < 0)
-		{
-			i++;
-			wall_top++;
-		}
-        for (y = 0; y < HEIGHT; y++)
+		init_wall(cub, wall, x);
+		y = 0;
+        while (y < HEIGHT)
         {
-            if (y >= (int)wall_top && y < (int)wall_bottom) // Wall
+            if (y >= (int)wall.top && y < (int)wall.bottom) // Wall
 			{
-                /*      CHANGE COLOR BY CORRESPONDING PIXEL IN TEXTURE  */
-				color = *(int *)(cub->imgs[cub->tex[x]].addr + (int)round(((i / ratio))) *  cub->imgs[cub->tex[x]].line_len + \
+				color = *(int *)(cub->imgs[cub->tex[x]].addr + (int)round(((wall.i / wall.ratio))) *  cub->imgs[cub->tex[x]].line_len + \
 					(int)round((cub->hits[x] * (double)TEXT_W)) * (cub->imgs[cub->tex[x]].bpp / 8));
-				i++;
+				wall.i++;
             	my_mlx_pixel_put(cub->bg, x, y, color);
 			}
+			y++;
 		}
+		x++;
     }
 }
