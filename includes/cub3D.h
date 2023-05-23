@@ -53,14 +53,14 @@ typedef struct s_ray
 	double	dy;
 	double	dx;
 	t_pos	pos;
-	int		mapX;
-	int		mapY;
+	int		map_x;
+	int		map_y;
 	t_pos	dir;
-	int		stepX;
-	int		stepY;
-	double	sideX;
-	double	sideY;
-	double	cameraX;
+	int		step_x;
+	int		step_y;
+	double	side_x;
+	double	side_y;
+	double	camera_x;
 	int		side;
 }		t_ray;
 
@@ -80,8 +80,8 @@ typedef struct s_player
 {
 	double	x;
 	double	y;
-	int		mapX;
-	int		mapY;
+	int		map_x;
+	int		map_y;
 	t_pos	dir;
 	t_pos	plane;
 }		t_player;
