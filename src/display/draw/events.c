@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 20:26:09 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/23 11:58:57 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:32:56 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,19 @@ void	move_player(int keysym, t_cub *cub)
 int	mouse_click(t_cub *cub)
 {
 	free_display(cub);
-	mlx_loop_end(cub->mlx_ptr);
+	free_gc();
+	exit(1);
 	return (0);
 }
 
 int	handle_keypress(int keysym, t_cub *cub)
 {
 	if (keysym == XK_Escape)
+	{
 		free_display(cub);
+		free_gc();
+		exit(1);
+	}
 	if (is_move(keysym))
 		move_player(keysym, cub);
 	rotate_player(keysym, cub);

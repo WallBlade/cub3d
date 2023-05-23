@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:36:04 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/09 13:57:43 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/23 14:26:00 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	print_error(char *str, char *arg)
+void	print_error(char *str, char *arg, t_cub *cub)
 {
 	while (*str)
 		write(2, str++, 1);
@@ -20,6 +20,8 @@ void	print_error(char *str, char *arg)
 		while (*arg)
 			write(2, arg++, 1);
 	write(2, "\n", 1);
+	if (cub)
+		free_display(cub);
 	free_gc();
 	exit(EXIT_FAILURE);
 }

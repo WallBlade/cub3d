@@ -29,11 +29,12 @@ $(NAME):	$(OBJ)
 clean:
 				@$(RM) $(OBJ)
 				@make clean -sC libft
+				@$(RM) libft.a
 
 fclean:		clean
 				$(RM) $(NAME)
-				@$(RM) libft/libft.a
-				@make clean -sC libft
+				@$(RM) libft.a
+				@make fclean -sC libft
 
 re:			fclean $(NAME)
 

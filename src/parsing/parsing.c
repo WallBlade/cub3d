@@ -37,7 +37,7 @@ char	**get_file(int fd, int count)
 	}
 	file[i] = NULL;
 	if (file[0] == NULL)
-		print_error("ERROR\nEmpty file", NULL);
+		print_error("ERROR\nEmpty file", NULL, NULL);
 	return (close(fd), file);
 }
 
@@ -52,7 +52,7 @@ char	**get_map(char **file)
 	j = 0;
 	len = ft_tablen(file);
 	map = collect(sizeof(char *) * (len - i));
-	if (!map)
+	if (!map || !file[i])
 		return (NULL);
 	while (++i < len)
 		map[j++] = ft_strdup(file[i]);
@@ -69,6 +69,10 @@ char	**get_assets(char **file)
 	assets = collect(sizeof(char *) * 5);
 	if (!assets)
 		return (NULL);
+	assets[NO] = NULL;
+	assets[SO] = NULL;
+	assets[WE] = NULL;
+	assets[EA] = NULL;
 	while (i < 6)
 	{
 		if (is_data(file[i]) == 1)
@@ -92,7 +96,7 @@ int	get_colors(char **file, int type)
 	int		tab;
 
 	i = 0;
-	tab = 0;
+	tab = -1;
 	while (i < 6)
 	{
 		if (is_data(file[i]) == 5 && type == 1)
@@ -102,7 +106,7 @@ int	get_colors(char **file, int type)
 		i++;
 	}
 	if (tab == -1)
-		print_error("ERROR\nCorrupted color", NULL);
+		print_error("ERROR\nCorrupted color", NULL, NULL);
 	return (tab);
 }
 

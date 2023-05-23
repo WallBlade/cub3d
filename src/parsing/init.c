@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/23 11:54:52 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:28:02 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_cub	*init_cub(char *arg)
 	if (!cub)
 		return (NULL);
 	count = count_lines(arg);
+	if (count == 0)
+		print_error("ERROR\nFailed opening file", NULL, NULL);
 	fd = open(arg, O_RDONLY);
 	if (fd < 0)
 		return (NULL);
@@ -41,23 +43,19 @@ t_cub	*init_cub(char *arg)
 
 void	init_assets(t_cub *cub)
 {
-	int		check;
 	t_mlx	*assets;
 
-	check = 0;
 	assets = collect(sizeof(t_mlx) * 4);
 	if (!assets)
 		return ;
-	if (download_image(cub, &assets[NO], cub->assets[NO]))
-		check += 1;
-	if (download_image(cub, &assets[SO], cub->assets[SO]))
-		check += 1;
-	if (download_image(cub, &assets[WE], cub->assets[WE]))
-		check += 1;
-	if (download_image(cub, &assets[EA], cub->assets[EA]))
-		check += 1;
-	if (check != 4)
-		print_error("ERROR\nFailed loading textures", NULL);
+	if (!download_image(cub, &assets[NO], cub->assets[NO]))
+		print_error("ERROR\nFailed loading textures", NULL, cub);
+	if (!download_image(cub, &assets[SO], cub->assets[SO]))
+		print_error("ERROR\nFailed loading textures", NULL, cub);
+	if (!download_image(cub, &assets[WE], cub->assets[WE]))
+		print_error("ERROR\nFailed loading textures", NULL, cub);
+	if (!download_image(cub, &assets[EA], cub->assets[EA]))
+		print_error("ERROR\nFailed loading textures", NULL, cub);
 	cub->imgs = assets;
 }
 

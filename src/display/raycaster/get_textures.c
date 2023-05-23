@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 19:26:49 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/11 16:15:06 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/23 14:13:55 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
 int	download_image(t_cub *cub, t_mlx *asset, char *path)
-{	
+{
 	asset->img_ptr = mlx_xpm_file_to_image(cub->mlx_ptr, path,
 			&asset->width, &asset->height);
 	asset->height = 0;

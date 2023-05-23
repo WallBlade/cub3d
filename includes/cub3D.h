@@ -190,7 +190,7 @@ void		rotate_player(int keysym, t_cub *cub);
 
 int			ft_tablen(char **tab);
 int			longest_row(char **tab);
-void		print_error(char *str, char *arg);
+void		print_error(char *str, char *arg, t_cub *cub);
 
 /*--------------------------Errors--------------------------*/
 /*--err_map_closed--*/

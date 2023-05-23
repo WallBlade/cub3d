@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:53:59 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/23 10:07:06 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:28:52 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	check_assets(char **assets)
 	char	*valid;
 
 	i = 0;
-	if (!assets[0] || !assets[1] || !assets[2] || !assets[3])
-		print_error("ERROR\nFailed loading textures", NULL);
-	while (assets[i])
+	valid = ".xpm";
+	if (ft_tablen(assets) != 4)
+		print_error("ERROR\nFailed loading textures", NULL, NULL);
+	while (assets && assets[i])
 	{
 		len = ft_strlen(assets[i]) - 4;
-		valid = ".xpm";
 		if (ft_strncmp(&assets[i][len], valid, 4) != 0)
-			print_error("ERROR\nCorrupted texture name : ", assets[i]);
+			print_error("ERROR\nCorrupted texture name : ", assets[i], NULL);
 		i++;
 	}
 }
@@ -39,7 +39,7 @@ int	check_filename(char *name)
 	len = ft_strlen(name) - 4;
 	valid = ".cub";
 	if (ft_strncmp(&name[len], valid, 4) != 0)
-		print_error("Error\n", NULL);
+		print_error("Error\n", NULL, NULL);
 	return (0);
 }
 
