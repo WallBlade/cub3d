@@ -32,7 +32,7 @@ clean:
 
 fclean:		clean
 				$(RM) $(NAME)
-				@$(RM) libft.a
+				@$(RM) libft/libft.a
 				@make clean -sC libft
 
 re:			fclean $(NAME)
