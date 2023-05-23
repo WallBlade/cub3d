@@ -6,7 +6,7 @@
 /*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 14:54:19 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/09 18:39:54 by zel-kass         ###   ########.fr       */
+/*   Updated: 2023/05/23 10:11:26 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,4 +97,3 @@ void	map_elem(char **map)
 	if (!rep_pos(map))
 		print_error("ERROR\nMultiple starting points", NULL);
 }
-

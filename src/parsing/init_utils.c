@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:57:44 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/11 16:05:15 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/23 10:11:11 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_player(char c)
 t_pos	determine_dir(char c)
 {
 	t_pos	dir;
-	
+
 	if (c == 'E')
 	{
 		dir.x = 1;
@@ -53,6 +53,16 @@ t_pos	determine_plane(t_pos dir)
 	return (plane);
 }
 
+void	load_data(t_player *player, char **map, int x, int y)
+{
+	player->x = x + 0.5;
+	player->y = y + 0.5;
+	player->mapX = x;
+	player->mapY = y;
+	player->dir = determine_dir(map[y][x]);
+	player->plane = determine_plane(player->dir);
+}
+
 t_player	*player_data(char **map)
 {
 	int			x;
@@ -70,12 +80,7 @@ t_player	*player_data(char **map)
 		{
 			if (is_player(map[y][x]))
 			{	
-				player->x = x + 0.5;
-				player->y = y + 0.5;
-				player->mapX = x;
-				player->mapY = y;
-				player->dir = determine_dir(map[y][x]);
-				player->plane = determine_plane(player->dir);
+				load_data(player, map, x, y);
 				break ;
 			}
 			x++;

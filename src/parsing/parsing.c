@@ -55,10 +55,7 @@ char	**get_map(char **file)
 	if (!map)
 		return (NULL);
 	while (++i < len)
-	{
-		
 		map[j++] = ft_strdup(file[i]);
-	}
 	map[j] = NULL;
 	return (map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: zel-kass <zel-kass@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/12 22:43:56 by zel-kass          #+#    #+#             */
-/*   Updated: 2023/05/11 16:26:16 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/23 10:06:23 by zel-kass         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	init_mlx(t_cub *cub)
 	if (!cub->win_ptr)
 		return (free(cub->win_ptr));
 	cub->bg->img_ptr = mlx_new_image(cub->mlx_ptr, WIDTH, HEIGHT);
-	cub->bg->addr= mlx_get_data_addr(cub->bg->img_ptr, &cub->bg->bpp, \
+	cub->bg->addr = mlx_get_data_addr(cub->bg->img_ptr, &cub->bg->bpp, \
 						&cub->bg->line_len, &cub->bg->endian);
 	init_assets(cub);
 	mlx_hook(cub->win_ptr, KeyPress, KeyPressMask, &handle_keypress, cub);
@@ -82,5 +82,4 @@ void	init_mlx(t_cub *cub)
 		mlx_destroy_window(cub->mlx_ptr, cub->win_ptr);
 	if (cub->mlx_ptr)
 		mlx_destroy_display(cub->mlx_ptr);
-	
 }
