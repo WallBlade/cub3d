@@ -178,6 +178,10 @@ int			handle_keypress(int keysym, t_cub *cub);
 /*---utils----*/
 int			is_move(int keysym);
 void		update_player(t_cub *cub, double incr_x, double incr_y, int option);
+void		update_player_rotate(t_cub *cub, int angle);
+void		update_player_side(t_cub *cub, double incr_x, double incr_y);
+void		update_player_fw(t_cub *cub, double incr_x, double incr_y);
+int			get_orient(t_ray *ray);
 void		move_player(int keysym, t_cub *cub);
 void		rotate_player(int keysym, t_cub *cub);
 
@@ -201,6 +205,7 @@ void		map_elem(char **map);
 
 int			render(t_cub *cub);
 void 		render_walls(t_cub *cub);
+int			get_color(t_cub *cub, t_draw *wall, int x);
 
 /*---------------------------Free---------------------------*/
 

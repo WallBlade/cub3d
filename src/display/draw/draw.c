@@ -6,7 +6,7 @@
 /*   By: smessal <smessal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 18:18:45 by smessal           #+#    #+#             */
-/*   Updated: 2023/05/23 11:19:39 by smessal          ###   ########.fr       */
+/*   Updated: 2023/05/23 12:04:33 by smessal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	my_mlx_pixel_put(t_mlx *bg, int x, int y, int color)
 	dst = bg->addr + (y * bg->line_len + x * (bg->bpp / 8));
 	*(unsigned int *)dst = color;
 }
-
 
 void	draw_background(t_cub *cub)
 {
@@ -54,43 +53,49 @@ int	render(t_cub *cub)
 	return (0);
 }
 
-void	init_wall(t_cub *cub, t_draw wall, int x)
+t_draw	*init_wall(t_cub *cub, int x)
 {
-	wall.height = (double)HEIGHT / cub->heights[x];
-	wall.top = (HEIGHT - wall.height) / 2;
-	wall.bottom =  wall.top + wall.height;
-	wall.ratio = wall.height / (double)TEXT_H;
-	wall.i = 0;
-	while (wall.top < 0)
+	t_draw	*wall;
+
+	wall = malloc(sizeof(t_draw));
+	if (!wall)
+		return (NULL);
+	wall->height = (double)HEIGHT / cub->heights[x];
+	wall->top = (HEIGHT - wall->height) / 2;
+	wall->bottom = wall->top + wall->height;
+	wall->ratio = wall->height / (double)TEXT_H;
+	wall->i = 0;
+	while (wall->top < 0)
 	{
-		wall.i++;
-		wall.top++;
+		wall->i++;
+		wall->top++;
 	}
+	return (wall);
 }
 
-void render_walls(t_cub *cub)
+void	render_walls(t_cub *cub)
 {
-    int x;
-    int y;
-    int color;
-	t_draw	wall;
+	int		x;
+	int		y;
+	int		color;
+	t_draw	*wall;
 
 	x = 0;
 	while (x < WIDTH)
-    {
-		init_wall(cub, wall, x);
+	{
+		wall = init_wall(cub, x);
 		y = 0;
-        while (y < HEIGHT)
-        {
-            if (y >= (int)wall.top && y < (int)wall.bottom) // Wall
+		while (y < HEIGHT)
+		{
+			if (y >= (int)wall->top && y < (int)wall->bottom)
 			{
-				color = *(int *)(cub->imgs[cub->tex[x]].addr + (int)round(((wall.i / wall.ratio))) *  cub->imgs[cub->tex[x]].line_len + \
-					(int)round((cub->hits[x] * (double)TEXT_W)) * (cub->imgs[cub->tex[x]].bpp / 8));
-				wall.i++;
-            	my_mlx_pixel_put(cub->bg, x, y, color);
+				color = get_color(cub, wall, x);
+				wall->i++;
+				my_mlx_pixel_put(cub->bg, x, y, color);
 			}
 			y++;
 		}
+		free(wall);
 		x++;
-    }
+	}
 }
